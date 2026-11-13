@@ -1,0 +1,2922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Church of the Temple of God (COTG Connect) — Digital Calling Card Hub</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0A192F" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy-950: #061020;
+      --navy-900: #0A192F;
+      --navy-800: #112240;
+      --navy-700: #1A3358;
+      --gold-300: #F7E7B4;
+      --gold-400: #E5C158;
+      --gold-500: #D4AF37;
+      --gold-600: #B58E1E;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #152C52 0%, #0A192F 55%, #050D1A 100%);
+      color: #F8FAFC;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .font-serif-royal {
+      font-family: 'Cinzel', Georgia, serif;
+    }
+
+   .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF3C4 0%, #D4AF37 50%, #F5D77F 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-gradient-bg {
+      background: linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #B88E1E 100%);
+    }
+
+    .gold-gradient-bg:hover {
+      background: linear-gradient(135deg, #F0CF6B 0%, #DFB93E 50%, #C79B24 100%);
+    }
+
+    .navy-card {
+      background: linear-gradient(180deg, rgba(17, 34, 64, 0.96) 0%, rgba(10, 25, 47, 0.98) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 25px 50px -12px rgba(2, 8, 20, 0.8), 0 0 28px rgba(212, 175, 55, 0.12);
+    }
+
+    .gold-border-subtle {
+      border: 1px solid rgba(212, 175, 55, 0.28);
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, rgba(22, 43, 77, 0.9) 0%, rgba(13, 28, 52, 0.95) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .action-btn:hover {
+      border-color: rgba(229, 193, 88, 0.8);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -6px rgba(212, 175, 55, 0.22);
+    }
+
+    .emblem-glow {
+      box-shadow: 0 0 32px rgba(212, 175, 55, 0.35), inset 0 0 14px rgba(212, 175, 55, 0.25);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(10, 25, 47, 0.6);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.4);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- Hidden File Inputs for Quick Upload -->
+  <input id="quickLogoFileInput" type="file" accept="image/*" class="hidden" />
+
+  <!-- Top Admin / Action Bar -->
+  <header id="adminToolbar" class="sticky top-0 z-40 backdrop-blur-md bg-slate-950/90 border-b border-amber-500/25">
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg gold-gradient-bg text-slate-950 font-bold text-sm shadow">
+          COTG
+        </span>
+        <div>
+          <div class="flex items-center gap-2">
+            <p class="text-xs sm:text-sm font-semibold text-amber-200 leading-tight">COTG Connect Multi-Card Hub</p>
+            <span id="networkStatusBadge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              Online &amp; Offline Ready
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400 hidden sm:block">HQ • 10 Parish Priests • Mission &amp; Visitation • Church Members</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+        <button id="quickUploadTopBtn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800/90 text-amber-300 border border-amber-400/35 hover:bg-slate-800 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>Upload Logo</span>
+        </button>
+
+        <button id="toggleEditorBtn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-amber-500/15 text-amber-300 border border-amber-400/40 hover:bg-amber-500/25 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+          </svg>
+          <span id="toggleEditorLabel">Edit Church Info</span>
+        </button>
+
+        <button id="openStudioModalBtn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-500/20 text-indigo-200 border border-indigo-400/40 hover:bg-indigo-500/30 transition">
+          <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <span>Photoshop, PWA &amp; Security</span>
+        </button>
+
+        <button id="openQrModalBtn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800/90 text-slate-200 border border-slate-700 hover:border-amber-400/50 hover:text-amber-200 transition">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+          </svg>
+          <span>QR Code</span>
+        </button>
+
+        <button id="downloadHtmlBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold gold-gradient-bg text-slate-950 shadow hover:opacity-95 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>Download index.html</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category & Profile Selector Bar -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 pt-5 pb-1">
+    <div class="navy-card rounded-2xl p-3 sm:p-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-amber-500/20">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400">Select Digital Calling Card Mode</span>
+          <h2 class="text-xs sm:text-sm font-semibold text-slate-200">Pumili ng Calling Card: CTG Headquarters, Parish Priests, Mission, o Church Members</h2>
+        </div>
+        <span id="activeCategoryPill" class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-400/30 self-start sm:self-auto">
+          Active: CTG Headquarters
+        </span>
+      </div>
+
+      <!-- 4 Main Category Tabs -->
+      <div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <button id="catTabHq" type="button" class="px-3 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition gold-gradient-bg text-slate-950 shadow">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          <span>CTG Headquarters</span>
+        </button>
+
+        <button id="catTabPriests" type="button" class="px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition bg-slate-900/90 text-slate-200 border border-amber-500/25 hover:border-amber-400/60">
+          <svg class="w-4 h-4 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span>Parish Priests (10)</span>
+        </button>
+
+        <button id="catTabMission" type="button" class="px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition bg-slate-900/90 text-slate-200 border border-amber-500/25 hover:border-amber-400/60">
+          <svg class="w-4 h-4 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>Mission &amp; Visitation</span>
+        </button>
+
+        <button id="catTabMember" type="button" class="px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition bg-slate-900/90 text-slate-200 border border-amber-500/25 hover:border-amber-400/60">
+          <svg class="w-4 h-4 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+          </svg>
+          <span>Church Members</span>
+        </button>
+      </div>
+
+      <!-- Sub-Selector Bar for Parish Priests (10 Parishes) -->
+      <div id="parishSelectorBar" class="hidden mt-3 pt-3 border-t border-slate-800">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+          <label for="parishSelectDropdown" class="text-xs font-semibold text-amber-300 shrink-0">
+            Pumili ng Parokya at Parish Priest:
+          </label>
+          <div class="flex items-center gap-2 flex-1 max-w-md">
+            <select id="parishSelectDropdown" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-amber-400/40 text-xs sm:text-sm text-white focus:outline-none focus:border-amber-400"></select>
+          </div>
+        </div>
+        <div id="parishQuickChips" class="mt-2.5 flex items-center gap-1.5 overflow-x-auto pb-1 custom-scrollbar"></div>
+      </div>
+
+      <!-- Sub-Selector Bar for Mission Presets -->
+      <div id="missionSelectorBar" class="hidden mt-3 pt-3 border-t border-slate-800">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="text-xs font-semibold text-amber-300">Uri ng Mission / Gawain:</span>
+          <div id="missionQuickChips" class="flex flex-wrap items-center gap-1.5"></div>
+        </div>
+      </div>
+
+      <!-- Sub-Selector Bar for Church Member Roles -->
+      <div id="memberSelectorBar" class="hidden mt-3 pt-3 border-t border-slate-800">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="text-xs font-semibold text-amber-300">Tungkulin / Liturgical Officer Preset:</span>
+          <div id="memberRoleChips" class="flex items-center gap-1.5 overflow-x-auto pb-1 custom-scrollbar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Workspace Container -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-8">
+    <div id="workspaceGrid" class="grid grid-cols-1 gap-8 items-start justify-items-center">
+
+      <!-- Left / Center Column: Mobile-Friendly Digital Calling Card -->
+      <section class="w-full max-w-md mx-auto">
+        <div class="navy-card rounded-3xl overflow-hidden relative">
+
+          <!-- Decorative Royal Navy & Gold Header Banner -->
+          <div class="relative h-36 bg-gradient-to-br from-[#163461] via-[#0D2142] to-[#071326] border-b border-amber-500/30 overflow-hidden">
+            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 18px 18px;"></div>
+            <div class="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-amber-400/15 blur-2xl"></div>
+            <div class="absolute -bottom-12 -left-12 w-40 h-40 rounded-full bg-amber-500/10 blur-2xl"></div>
+
+            <!-- Top Pill Badge & Quick Share -->
+            <div class="relative z-10 px-5 pt-4 flex items-center justify-between">
+              <span id="cardBadgeText" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-slate-950/60 text-amber-300 border border-amber-400/35">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                COTG Connect
+              </span>
+
+              <button id="shareCardBtn" type="button" title="Copy Digital Card Link" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-950/60 text-amber-200 border border-amber-400/30 hover:border-amber-300 transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                <span>Share</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Church Emblem / Uploaded Logo & Identity Header -->
+          <div class="px-6 pb-6 -mt-14 relative z-10 text-center">
+            <div class="relative w-28 h-28 mx-auto">
+              <div id="emblemCircleContainer" class="w-28 h-28 rounded-full bg-gradient-to-b from-[#13284C] to-[#091529] p-1.5 border-2 border-amber-400/80 emblem-glow flex items-center justify-center overflow-hidden">
+                <!-- Custom Uploaded Logo / Photo Image (shown when uploaded) -->
+                <img id="customLogoImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Church Logo" class="hidden w-full h-full object-cover rounded-full" />
+
+                <!-- Default Royal Gold Church Emblem SVG -->
+                <svg id="defaultEmblemSvg" class="w-20 h-20 text-amber-400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="3 2" />
+                  <path d="M22 72H78" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M27 72V48L50 32L73 48V72" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linejoin="round" />
+                  <path d="M36 72V53H64V72" stroke="url(#goldGrad)" stroke-width="2" />
+                  <path d="M45 72V59C45 56.2386 47.2386 54 50 54C52.7614 54 55 56.2386 55 59V72" fill="rgba(212,175,55,0.22)" stroke="url(#goldGrad)" stroke-width="2" />
+                  <path d="M50 12V32" stroke="url(#goldGrad)" stroke-width="3.2" stroke-linecap="round" />
+                  <path d="M43 19H57" stroke="url(#goldGrad)" stroke-width="3.2" stroke-linecap="round" />
+                  <path d="M32 26L37 30M68 26L63 30" stroke="url(#goldGrad)" stroke-width="1.8" stroke-linecap="round" />
+                  <defs>
+                    <linearGradient id="goldGrad" x1="15" y1="10" x2="85" y2="85" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#FFF3C4" />
+                      <stop offset="50%" stop-color="#D4AF37" />
+                      <stop offset="100%" stop-color="#B58E1E" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+
+              <!-- Quick Camera Button on Emblem to Upload Church Logo -->
+              <button id="emblemUploadBtn" type="button" title="Maglagay ng Logo ng Simbahan o Larawan" class="absolute bottom-0 right-0 w-8 h-8 rounded-full gold-gradient-bg text-slate-950 shadow-lg border-2 border-slate-950 flex items-center justify-center hover:scale-105 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </button>
+            </div>
+
+            <h1 id="displayChurchName" class="mt-3.5 font-serif-royal text-xl sm:text-2xl font-bold tracking-wide gold-gradient-text">
+              Church of the Temple of God
+            </h1>
+            <p id="displaySubtitle" class="mt-1 text-xs sm:text-sm font-semibold text-amber-200/95">
+              COTG Central Headquarters • San Gabriel, La Union
+            </p>
+            <p id="displayRoleLine" class="mt-0.5 text-xs text-slate-300">
+              Supreme Head &amp; Central Administration
+            </p>
+
+            <!-- Dynamic Role/Context Badge Box (Priest Info / Mission Pass / Member ID) -->
+            <div id="contextHighlightCard" class="mt-3.5 p-3 rounded-2xl bg-slate-900/80 border border-amber-400/30 text-left">
+              <div class="flex items-center justify-between gap-2 pb-2 border-b border-amber-500/20">
+                <span id="contextHighlightHeader" class="text-[10px] font-bold uppercase tracking-widest text-amber-400">
+                  Headquarters Leadership &amp; Oversight
+                </span>
+                <span id="contextHighlightTag" class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-200">
+                  10 Active Parishes
+                </span>
+              </div>
+              <div id="contextHighlightRows" class="mt-2 space-y-1.5 text-xs"></div>
+            </div>
+
+            <!-- Customizable Bible Verse / Tagline Box -->
+            <div class="mt-3.5 px-4 py-3 rounded-2xl bg-slate-950/55 gold-border-subtle text-center">
+              <p id="displayVerseText" class="text-xs sm:text-sm italic text-slate-200 leading-relaxed">
+                "I was glad when they said unto me, Let us go into the house of the LORD."
+              </p>
+              <p id="displayVerseRef" class="mt-1 text-[11px] font-semibold uppercase tracking-widest text-amber-400">
+                — Psalm 122:1
+              </p>
+            </div>
+
+            <!-- Primary CTA: Save Contact (.vcf) -->
+            <div class="mt-5">
+              <button id="saveVcfBtn" type="button" class="w-full py-3.5 px-5 rounded-2xl gold-gradient-bg text-slate-950 font-bold text-sm sm:text-base shadow-lg flex items-center justify-center gap-2.5 transition transform active:scale-[0.99]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+                <span id="saveVcfBtnLabel">Save Church Contact (.vcf)</span>
+              </button>
+              <p class="mt-1.5 text-[11px] text-slate-400">
+                Downloads <span id="vcfFilenamePreview" class="text-amber-300/90 font-mono">Church_of_the_Temple_of_God.vcf</span>
+              </p>
+            </div>
+
+            <!-- Quick Contact Row (Call, Email, Website, QR) -->
+            <div class="mt-4 grid grid-cols-4 gap-2">
+              <a id="quickCallLink" href="tel:+639171234567" class="action-btn rounded-xl py-2.5 px-2 flex flex-col items-center justify-center gap-1 text-amber-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span class="text-[11px] font-medium text-slate-200">Call</span>
+              </a>
+
+              <a id="quickEmailLink" href="mailto:connect@ctgministries.net" class="action-btn rounded-xl py-2.5 px-2 flex flex-col items-center justify-center gap-1 text-amber-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span class="text-[11px] font-medium text-slate-200">Email</span>
+              </a>
+
+              <a id="quickWebsiteLink" href="https://www.ctgministries.net" target="_blank" rel="noopener noreferrer" class="action-btn rounded-xl py-2.5 px-2 flex flex-col items-center justify-center gap-1 text-amber-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+                <span class="text-[11px] font-medium text-slate-200">Website</span>
+              </a>
+
+              <button id="quickQrBtn" type="button" class="action-btn rounded-xl py-2.5 px-2 flex flex-col items-center justify-center gap-1 text-amber-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                </svg>
+                <span class="text-[11px] font-medium text-slate-200">QR Code</span>
+              </button>
+            </div>
+
+            <!-- Church-Specific Action Buttons -->
+            <div class="mt-5 space-y-3 text-left">
+
+              <!-- 1. Collapsible Service Schedules Card -->
+              <div class="rounded-2xl action-btn overflow-hidden">
+                <button id="toggleScheduleBtn" type="button" class="w-full px-4 py-3.5 flex items-center justify-between text-left">
+                  <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/35 flex items-center justify-center text-amber-300 shrink-0">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p id="scheduleHeaderTitle" class="text-sm font-semibold text-white">Service &amp; Ministry Schedules</p>
+                      <p id="scheduleHeaderSub" class="text-xs text-slate-300">Mass, Pampamilya, Evangelio &amp; Fellowships</p>
+                    </div>
+                  </div>
+                  <svg id="scheduleChevron" class="w-5 h-5 text-amber-300 transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                <div id="scheduleCollapseBody" class="px-4 pb-4 pt-1 border-t border-amber-500/20 bg-slate-950/40 space-y-2.5">
+                  <div class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-900/70 border border-amber-500/15">
+                    <div>
+                      <p id="displaySundayTitle" class="text-xs font-semibold text-amber-300 uppercase tracking-wider">Holy Mass &amp; Pampamilya</p>
+                      <p id="displaySundayNote" class="text-xs text-slate-300 mt-0.5">A.M. &amp; P.M. Mass • Adal ti Evangelio</p>
+                    </div>
+                    <span id="displaySundayTime" class="text-xs font-bold text-white bg-amber-500/20 border border-amber-400/30 px-2.5 py-1 rounded-lg whitespace-nowrap">
+                      Sun • 8:30 AM
+                    </span>
+                  </div>
+
+                  <div class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-900/70 border border-amber-500/15">
+                    <div>
+                      <p id="displayMidweekTitle" class="text-xs font-semibold text-amber-300 uppercase tracking-wider">Online Ministry &amp; Devotion</p>
+                      <p id="displayMidweekNote" class="text-xs text-slate-300 mt-0.5">Midweek Preaching, Orasyon &amp; House Visit</p>
+                    </div>
+                    <span id="displayMidweekTime" class="text-xs font-bold text-white bg-amber-500/20 border border-amber-400/30 px-2.5 py-1 rounded-lg whitespace-nowrap">
+                      Wed/Fri • 6:00 PM
+                    </span>
+                  </div>
+
+                  <div class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-900/70 border border-amber-500/15">
+                    <div>
+                      <p id="displayYouthTitle" class="text-xs font-semibold text-amber-300 uppercase tracking-wider">Youth &amp; Kids Fellowship</p>
+                      <p id="displayYouthNote" class="text-xs text-slate-300 mt-0.5">Agtultuloy na Panagadal &amp; Seminarians</p>
+                    </div>
+                    <span id="displayYouthTime" class="text-xs font-bold text-white bg-amber-500/20 border border-amber-400/30 px-2.5 py-1 rounded-lg whitespace-nowrap">
+                      Sat/Sun • 2:00 PM
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Church Location (Google Maps) -->
+              <a id="mapsActionBtn" href="https://www.google.com/maps/search/?api=1&query=San+Gabriel+La+Union+Philippines" target="_blank" rel="noopener noreferrer" class="w-full px-4 py-3.5 rounded-2xl action-btn flex items-center justify-between group">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/35 flex items-center justify-center text-amber-300 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </span>
+                  <div class="truncate">
+                    <p class="text-sm font-semibold text-white group-hover:text-amber-200 transition">Church / Parish Location (Google Maps)</p>
+                    <p id="displayAddressText" class="text-xs text-slate-300 truncate">Lipay Norte, San Gabriel, La Union</p>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 text-amber-300 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <!-- 3. Send a Prayer Request / Visitation Request -->
+              <a id="prayerActionBtn" href="https://www.ctgministries.net" target="_blank" rel="noopener noreferrer" class="w-full px-4 py-3.5 rounded-2xl action-btn flex items-center justify-between group">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/35 flex items-center justify-center text-amber-300 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </span>
+                  <div class="truncate">
+                    <p class="text-sm font-semibold text-white group-hover:text-amber-200 transition">Send a Prayer / House Visit Request</p>
+                    <p id="displayPrayerSubtitle" class="text-xs text-slate-300 truncate">Submit via Google Form or Church Messenger</p>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 text-amber-300 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+
+              <!-- 4. Watch Online / Sermons -->
+              <a id="streamActionBtn" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="w-full px-4 py-3.5 rounded-2xl action-btn flex items-center justify-between group">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/35 flex items-center justify-center text-amber-300 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </span>
+                  <div class="truncate">
+                    <p class="text-sm font-semibold text-white group-hover:text-amber-200 transition">Watch Online Ministry / Sermons</p>
+                    <p id="displayStreamSubtitle" class="text-xs text-slate-300 truncate">Join Facebook Live &amp; YouTube Broadcasts</p>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 text-amber-300 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+
+            <!-- Inline Scannable QR Preview Section inside the Card -->
+            <div class="mt-6 pt-5 border-t border-amber-500/20">
+              <div class="p-4 rounded-2xl bg-slate-950/65 gold-border-subtle flex flex-col sm:flex-row items-center gap-4">
+                <div class="bg-white p-2.5 rounded-xl shadow-md shrink-0">
+                  <div id="inlineQrContainer" class="w-28 h-28 flex items-center justify-center"></div>
+                </div>
+                <div class="text-center sm:text-left flex-1">
+                  <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400">Scan to Connect</span>
+                  <h2 id="inlineQrHeading" class="text-sm font-bold text-white mt-0.5">Instant Digital Calling Card</h2>
+                  <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                    I-scan gamit ang phone camera para ma-open ang card o ma-save agad ang contact details.
+                  </p>
+                  <div class="mt-2.5 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <button id="inlineQrModeToggleBtn" type="button" class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-400/30 hover:bg-amber-500/25 transition">
+                      Mode: <span id="inlineQrModeLabel">Card URL</span>
+                    </button>
+                    <button id="inlineDownloadQrBtn" type="button" class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:border-amber-400/40 transition">
+                      Save QR (.png)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Footer Links -->
+            <div class="mt-5 flex items-center justify-center gap-3">
+              <a id="socialFbLink" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" title="Facebook Page" class="w-9 h-9 rounded-full action-btn flex items-center justify-center text-amber-300 hover:text-white">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                </svg>
+              </a>
+              <a id="socialYtLink" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" title="YouTube Channel" class="w-9 h-9 rounded-full action-btn flex items-center justify-center text-amber-300 hover:text-white">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+              <a id="socialMessengerLink" href="https://m.me/" target="_blank" rel="noopener noreferrer" title="Facebook Messenger" class="w-9 h-9 rounded-full action-btn flex items-center justify-center text-amber-300 hover:text-white">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.13.26.35.27.57l.05 1.78c.02.57.61.94 1.13.71l1.98-.87c.17-.08.36-.1.55-.06.88.24 1.86.37 2.88.37 5.64 0 10-4.13 10-9.7C22 6.13 17.64 2 12 2zm5.89 7.56l-2.9 4.61c-.46.73-1.45.92-2.13.4l-2.31-1.73a.6.6 0 00-.72 0l-3.12 2.37c-.41.31-.95-.18-.68-.62l2.9-4.61c.46-.73 1.45-.92 2.13-.4l2.31 1.73a.6.6 0 00.72 0l3.12-2.37c.41-.31.95.18.68.62z"/>
+                </svg>
+              </a>
+            </div>
+
+            <p id="displayFooterPhone" class="mt-4 text-[11px] text-slate-400">
+              +63 917 123 4567 • connect@ctgministries.net
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Live Editor Panel (Toggled by "Edit Church Info") -->
+      <aside id="editorPanel" class="hidden w-full max-w-xl mx-auto navy-card rounded-3xl p-5 sm:p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-amber-500/25">
+          <div>
+            <span id="editorActiveCategoryLabel" class="text-[11px] font-bold uppercase tracking-widest text-amber-400">Live Customizer • CTG Headquarters</span>
+            <h2 class="text-lg font-bold text-white">Edit Digital Card &amp; Upload Logo</h2>
+          </div>
+          <button id="closeEditorBtn" type="button" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/70 transition" title="Close Editor">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <form id="churchEditorForm" class="mt-4 space-y-5 max-h-[75vh] overflow-y-auto pr-1 custom-scrollbar">
+
+          <!-- Section 0: Church Logo / Profile Image Uploader -->
+          <div class="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-400/35 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-amber-300">Church Logo &amp; Image Uploader</h3>
+              <button id="removeLogoBtn" type="button" class="text-[11px] font-medium text-rose-300 hover:text-rose-200 underline">
+                Use Default Gold Emblem
+              </button>
+            </div>
+            <p class="text-xs text-slate-300">
+              Mag-upload ng official Church Logo ng CTG o larawan ng Parish Priest / Member. Automatic itong masa-save kapag nag-click ka ng <strong>Download index.html</strong>.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <label class="cursor-pointer px-3 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs flex items-center justify-center gap-2 shadow">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                <span>Upload Church Logo (All Cards)</span>
+                <input id="editorGlobalLogoInput" type="file" accept="image/*" class="hidden" />
+              </label>
+
+              <label class="cursor-pointer px-3 py-2.5 rounded-xl bg-slate-900 text-amber-300 border border-amber-400/40 hover:bg-slate-800 font-semibold text-xs flex items-center justify-center gap-2 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Upload Photo (This Card Only)</span>
+                <input id="editorProfilePhotoInput" type="file" accept="image/*" class="hidden" />
+              </label>
+            </div>
+
+            <div>
+              <label for="inputLogoUrl" class="block text-[11px] font-medium text-slate-300 mb-1">Or Paste Direct Image / Logo URL</label>
+              <input id="inputLogoUrl" type="url" placeholder="https://example.com/ctg-logo.png" class="w-full px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-400" />
+            </div>
+          </div>
+
+          <!-- Section 1: Identity & Bible Verse -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-300">1. Card Title, Role &amp; Bible Verse</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label id="labelChurchName" for="inputChurchName" class="block text-xs font-medium text-slate-300 mb-1">Main Heading / Name</label>
+                <input id="inputChurchName" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+              <div>
+                <label for="inputBadgeText" class="block text-xs font-medium text-slate-300 mb-1">Top Pill Badge</label>
+                <input id="inputBadgeText" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="inputSubtitle" class="block text-xs font-medium text-slate-300 mb-1">Parish / Location Subtitle</label>
+                <input id="inputSubtitle" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+              <div>
+                <label for="inputRoleLine" class="block text-xs font-medium text-slate-300 mb-1">Title / Ministry Role</label>
+                <input id="inputRoleLine" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+            </div>
+
+            <!-- Dynamic Context Fields (Parish Priest / Mission / Member Details) -->
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-amber-500/20 space-y-2.5">
+              <p id="editorContextBoxTitle" class="text-xs font-semibold text-amber-200">Profile Details (HQ / Parish / Mission / Member)</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label id="labelMeta1" for="inputMeta1" class="block text-[11px] font-medium text-slate-300 mb-1">Detail 1</label>
+                  <input id="inputMeta1" type="text" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+                </div>
+                <div>
+                  <label id="labelMeta2" for="inputMeta2" class="block text-[11px] font-medium text-slate-300 mb-1">Detail 2</label>
+                  <input id="inputMeta2" type="text" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+                </div>
+                <div>
+                  <label id="labelMeta3" for="inputMeta3" class="block text-[11px] font-medium text-slate-300 mb-1">Detail 3</label>
+                  <input id="inputMeta3" type="text" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+                </div>
+                <div>
+                  <label id="labelMeta4" for="inputMeta4" class="block text-[11px] font-medium text-slate-300 mb-1">Detail 4</label>
+                  <input id="inputMeta4" type="text" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label for="inputVerseText" class="block text-xs font-medium text-slate-300 mb-1">Bible Verse / Mission Quote</label>
+              <textarea id="inputVerseText" rows="2" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400"></textarea>
+            </div>
+
+            <div>
+              <label for="inputVerseRef" class="block text-xs font-medium text-slate-300 mb-1">Scripture Reference</label>
+              <input id="inputVerseRef" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+            </div>
+          </div>
+
+          <!-- Section 2: Direct Contact Details (for .vcf & Quick Buttons) -->
+          <div class="pt-3 border-t border-slate-800 space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-300">2. Contact Details (.vcf &amp; Quick Links)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="inputPhone" class="block text-xs font-medium text-slate-300 mb-1">Phone / Mobile Number</label>
+                <input id="inputPhone" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+              <div>
+                <label for="inputEmail" class="block text-xs font-medium text-slate-300 mb-1">Email Address</label>
+                <input id="inputEmail" type="email" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="inputWebsite" class="block text-xs font-medium text-slate-300 mb-1">Official Website / Card URL</label>
+                <input id="inputWebsite" type="url" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+              <div>
+                <label for="inputAddress" class="block text-xs font-medium text-slate-300 mb-1">Parish / Mission Address</label>
+                <input id="inputAddress" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Service Schedules -->
+          <div class="pt-3 border-t border-slate-800 space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-300">3. Service &amp; Ministry Schedules</h3>
+
+            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+              <p class="text-xs font-semibold text-amber-200">Schedule 1 (Mass / Pampamilya / Main Activity)</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <input id="inputSundayTitle" type="text" placeholder="Service Title" class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+                <input id="inputSundayTime" type="text" placeholder="Time (e.g. Sun • 8:30 AM)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+              </div>
+              <input id="inputSundayNote" type="text" placeholder="Location / Subtitle" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+              <p class="text-xs font-semibold text-amber-200">Schedule 2 (Online Ministry / House Visitation)</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <input id="inputMidweekTitle" type="text" placeholder="Service Title" class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+                <input id="inputMidweekTime" type="text" placeholder="Time (e.g. Wed/Fri • 6:00 PM)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+              </div>
+              <input id="inputMidweekNote" type="text" placeholder="Location / Subtitle" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+              <p class="text-xs font-semibold text-amber-200">Schedule 3 (Youth &amp; Kids Fellowship / Evangelio)</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <input id="inputYouthTitle" type="text" placeholder="Service Title" class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+                <input id="inputYouthTime" type="text" placeholder="Time (e.g. Sat/Sun • 2:00 PM)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+              </div>
+              <input id="inputYouthNote" type="text" placeholder="Location / Subtitle" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white" />
+            </div>
+          </div>
+
+          <!-- Section 4: Action Button Links & Social Media -->
+          <div class="pt-3 border-t border-slate-800 space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-amber-300">4. Action Buttons &amp; Social URLs</h3>
+
+            <div>
+              <label for="inputMapsUrl" class="block text-xs font-medium text-slate-300 mb-1">Google Maps Direction Link</label>
+              <input id="inputMapsUrl" type="url" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+            </div>
+
+            <div>
+              <label for="inputPrayerUrl" class="block text-xs font-medium text-slate-300 mb-1">Prayer / Visitation Request Link (Google Form or Messenger)</label>
+              <input id="inputPrayerUrl" type="url" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+            </div>
+
+            <div>
+              <label for="inputStreamUrl" class="block text-xs font-medium text-slate-300 mb-1">Watch Online / Sermons Link (Facebook Live or YouTube)</label>
+              <input id="inputStreamUrl" type="url" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div>
+                <label for="inputFbUrl" class="block text-[11px] font-medium text-slate-300 mb-1">Facebook Page</label>
+                <input id="inputFbUrl" type="url" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700 text-xs text-white" />
+              </div>
+              <div>
+                <label for="inputYtUrl" class="block text-[11px] font-medium text-slate-300 mb-1">YouTube Channel</label>
+                <input id="inputYtUrl" type="url" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700 text-xs text-white" />
+              </div>
+              <div>
+                <label for="inputMessengerUrl" class="block text-[11px] font-medium text-slate-300 mb-1">Messenger Link</label>
+                <input id="inputMessengerUrl" type="url" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700 text-xs text-white" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Export / Reset Actions -->
+          <div class="pt-4 border-t border-amber-500/25 flex flex-wrap items-center justify-between gap-2">
+            <button id="resetDefaultsBtn" type="button" class="px-3 py-2 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition">
+              Reset to Default
+            </button>
+
+            <div class="flex items-center gap-2">
+              <button id="editorDownloadVcfBtn" type="button" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/40 hover:bg-amber-500/30 transition">
+                Test .vcf Download
+              </button>
+              <button id="editorDownloadHtmlBtn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold gold-gradient-bg text-slate-950 shadow">
+                Download Updated index.html
+              </button>
+            </div>
+          </div>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Studio Modal: Photoshop Physical Card (300 DPI), Offline PWA, Google Sites & Anti-Hack Security -->
+  <div id="studioModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/85 backdrop-blur-sm p-3 sm:p-6">
+    <div class="navy-card rounded-3xl max-w-4xl w-full p-5 sm:p-7 relative max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-amber-500/25 shrink-0">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400">All-in-One Control Center</span>
+          <h3 class="text-lg sm:text-xl font-serif-royal font-bold text-white">Photoshop Card Print • Offline PWA • Security &amp; Step-by-Step Guide</h3>
+        </div>
+        <button id="closeStudioModalBtn" type="button" class="p-2 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Studio Modal Tabs -->
+      <div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 shrink-0">
+        <button id="studioTabPhotoshop" type="button" class="px-3 py-2 rounded-xl text-xs font-bold gold-gradient-bg text-slate-950">
+          1. Photoshop Physical Card
+        </button>
+        <button id="studioTabSecurity" type="button" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-700">
+          2. Security &amp; Public Lock
+        </button>
+        <button id="studioTabOffline" type="button" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-700">
+          3. Offline PWA &amp; Google Sites
+        </button>
+        <button id="studioTabSteps" type="button" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-700">
+          4. Step 1 to Last Step Guide
+        </button>
+      </div>
+
+      <!-- Studio Tab Panels -->
+      <div class="mt-4 overflow-y-auto pr-1 custom-scrollbar space-y-4 flex-1">
+
+        <!-- Panel 1: Photoshop Physical Card (3.5" x 2" @ 300 DPI) -->
+        <div id="panelPhotoshop" class="space-y-4">
+          <div class="p-4 rounded-2xl bg-slate-900/80 border border-amber-400/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <h4 class="text-sm font-bold text-amber-300">300 DPI Physical Calling Card Asset Generator (Para sa Adobe Photoshop)</h4>
+              <p class="text-xs text-slate-300 mt-0.5">
+                Standard Calling Card Size: <strong>3.5" × 2.0"</strong> na may <strong>0.125" Print Bleed</strong> (Total: <strong>1125 × 675 px @ 300 DPI</strong>). I-download ang Front, Back, o High-Res QR Code PNG at buksan diretso sa Photoshop.
+              </p>
+            </div>
+            <label class="inline-flex items-center gap-2 text-xs text-amber-200 cursor-pointer shrink-0 bg-slate-950/80 px-3 py-2 rounded-xl border border-amber-400/30">
+              <input id="toggleBleedGuidesCheckbox" type="checkbox" checked class="rounded text-amber-400 focus:ring-0" />
+              <span>Show Trim &amp; Safe Zone Guides</span>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Front Card Preview -->
+            <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2.5 text-center">
+              <p class="text-xs font-bold uppercase tracking-wider text-amber-300">Front Side (3.5" × 2" + Bleed)</p>
+              <canvas id="photoshopFrontCanvas" width="1125" height="675" class="w-full h-auto rounded-xl border border-amber-500/30 shadow-lg"></canvas>
+              <button id="downloadPsFrontBtn" type="button" class="w-full py-2.5 px-4 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs shadow">
+                Download Front Card (300 DPI .PNG for Photoshop)
+              </button>
+            </div>
+
+            <!-- Back Card Preview -->
+            <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2.5 text-center">
+              <p class="text-xs font-bold uppercase tracking-wider text-amber-300">Back Side with Scannable QR (3.5" × 2" + Bleed)</p>
+              <canvas id="photoshopBackCanvas" width="1125" height="675" class="w-full h-auto rounded-xl border border-amber-500/30 shadow-lg"></canvas>
+              <button id="downloadPsBackBtn" type="button" class="w-full py-2.5 px-4 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs shadow">
+                Download Back Card (300 DPI .PNG for Photoshop)
+              </button>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-slate-900/70 border border-slate-800 flex flex-wrap items-center justify-between gap-3">
+            <div class="text-xs text-slate-300">
+              <strong class="text-white">Gusto mo bang ikaw mismo ang mag-layout sa Photoshop?</strong> I-download ang High-Res QR Code (1000×1000 px) para i-drag-and-drop sa sarili mong `.PSD` template.
+            </div>
+            <button id="downloadHiResQrBtn" type="button" class="px-4 py-2 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/40 font-semibold text-xs hover:bg-amber-500/30 transition">
+              Download 1000×1000px QR Only (.PNG)
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel 2: Security & Public Read-Only Export -->
+        <div id="panelSecurity" class="hidden space-y-4">
+          <div class="p-4 rounded-2xl bg-slate-900/80 border border-amber-400/30 space-y-2">
+            <h4 class="text-sm font-bold text-amber-300">Paano Maging Ligtas sa Hack (100% Static &amp; Read-Only Public Mode)</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Kapag nag-upload ka sa GitHub Pages o Google Sites, dapat <strong>Read-Only Public Version</strong> ang naka-upload para walang ibang taong makapag-edit, makapag-inject ng script, o makagalaw ng impormasyon ng simbahan. Ikaw lang ang may hawak ng <strong>Admin Builder Version</strong> sa iyong VS Code sa iMac.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-slate-950/80 border border-emerald-500/35 space-y-3">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-300">Recommended for GitHub Pages</span>
+              <h5 class="text-sm font-bold text-white">Public Read-Only `index.html`</h5>
+              <p class="text-xs text-slate-300">
+                Tinatanggal ang Edit Toolbar sa public view para malinis at 100% tamper-proof sa mga bisita. Puwede mo pa ring buksan ang editor gamit ang iyong Admin PIN o keyboard shortcut (`Ctrl + Shift + E`).
+              </p>
+              <button id="downloadPublicHtmlBtn" type="button" class="w-full py-2.5 px-4 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs shadow">
+                Download Public (Read-Only) index.html
+              </button>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-950/80 border border-amber-500/35 space-y-3">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300">For Local VS Code Editing</span>
+              <h5 class="text-sm font-bold text-white">Master Admin Builder `index.html`</h5>
+              <p class="text-xs text-slate-300">
+                Kumpleto sa Live Editor, Logo Uploader, at Photoshop Generator. I-save ito sa iyong local project folder sa VS Code para madali kang makapag-edit anumang oras.
+              </p>
+              <button id="downloadAdminHtmlBtn" type="button" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 text-amber-300 border border-amber-400/40 font-bold text-xs hover:bg-slate-700 transition">
+                Download Master Admin index.html
+              </button>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-amber-300">Admin PIN Protection (Optional Unlock Key)</h5>
+            <p class="text-xs text-slate-300">
+              Maglagay ng Admin PIN para kahit may pumindot ng `Ctrl + Shift + E` sa Public Mode, hihingi muna ito ng PIN bago bumukas ang Live Editor:
+            </p>
+            <div class="flex flex-col sm:flex-row gap-2 max-w-md">
+              <input id="adminPinInput" type="password" placeholder="Set Admin PIN (e.g. COTG2027)" class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white" />
+              <button id="saveAdminPinBtn" type="button" class="px-4 py-2 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/40 text-xs font-semibold">
+                Save Admin PIN
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Offline PWA & Google Sites Embed -->
+        <div id="panelOffline" class="hidden space-y-4">
+          <div class="p-4 rounded-2xl bg-slate-900/80 border border-amber-400/30 space-y-2">
+            <h4 class="text-sm font-bold text-amber-300">Offline + Online Progressive Web App (PWA) &amp; Google Sites</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              I-download ang `sw.js` (Service Worker) at `manifest.json` at ilagay sa parehong VS Code folder ng iyong `index.html`. Kapag binuksan ang site nang isang beses habang online, <strong>gagana na ito kahit walang internet (Offline)</strong> sa phone o computer!
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2.5">
+              <h5 class="text-sm font-bold text-white">1. Offline Service Worker (`sw.js`)</h5>
+              <p class="text-xs text-slate-300">Sine-save sa cache ng phone/browser ang buong Digital Calling Card, mga parokya, `.vcf` generator, at QR code para mabuksan kahit walang signal.</p>
+              <button id="downloadSwBtn" type="button" class="w-full py-2.5 px-4 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs shadow">
+                Download sw.js (Offline Engine)
+              </button>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2.5">
+              <h5 class="text-sm font-bold text-white">2. Web App Manifest (`manifest.json`)</h5>
+              <p class="text-xs text-slate-300">Para ma-install ang COTG Connect sa Home Screen ng Android, iPhone, at desktop na parang native mobile app.</p>
+              <button id="downloadManifestBtn" type="button" class="w-full py-2.5 px-4 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/40 font-bold text-xs hover:bg-amber-500/30 transition">
+                Download manifest.json (Installable App)
+              </button>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <h5 class="text-sm font-bold text-white">3. Google Sites Embed Code</h5>
+              <button id="copyGoogleSitesCodeBtn" type="button" class="px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-400/40 text-xs font-semibold">
+                Copy Embed Code
+              </button>
+            </div>
+            <p class="text-xs text-slate-300">
+              Sa Google Sites, pumunta sa <strong>Insert &rarr; Embed &rarr; Embed Code</strong> at i-paste ang code sa ibaba (palitan ang URL ng iyong GitHub Pages link, o i-paste ang buong Public `index.html` code):
+            </p>
+            <textarea id="googleSitesEmbedTextarea" readonly rows="3" class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-[11px] font-mono text-amber-200"></textarea>
+          </div>
+        </div>
+
+        <!-- Panel 4: Step 1 to Last Step Interactive Checklist -->
+        <div id="panelSteps" class="hidden space-y-3 text-xs text-slate-200">
+          <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-amber-400/25">
+            <p class="font-bold text-amber-300 text-sm">Step 1: I-customize ang Impormasyon at Mag-upload ng Logo Dito</p>
+            <p class="mt-1 text-slate-300">Pindutin ang <strong>Upload Logo</strong> sa itaas para ilagay ang official logo ng Church of the Temple of God. Gamitin ang <strong>Edit Church Info</strong> para i-check o i-update ang phone number, address, at links ng HQ, 10 Parish Priests, Mission, at Members.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-amber-400/25">
+            <p class="font-bold text-amber-300 text-sm">Step 2: I-download ang mga Files papunta sa VS Code Folder</p>
+            <p class="mt-1 text-slate-300">Gumawa ng folder sa iyong Mac (hal. <code>cotg-connect</code>) at buksan sa <strong>VS Code</strong>. Sa modal na ito, i-download ang: (a) <strong>Public Read-Only <code>index.html</code></strong>, (b) <strong><code>sw.js</code></strong>, at (c) <strong><code>manifest.json</code></strong> para gumana nang offline at online.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-amber-400/25">
+            <p class="font-bold text-amber-300 text-sm">Step 3: I-push sa GitHub at I-enable ang Security + GitHub Pages</p>
+            <p class="mt-1 text-slate-300">I-push ang folder sa iyong GitHub repository. Buksan ang <strong>Settings &rarr; Pages</strong> (Branch: <code>main</code>, Enforce HTTPS: Checked). Siguraduhing naka-on ang <strong>Two-Factor Authentication (2FA)</strong> at Branch Protection sa GitHub para walang ibang maka-edit ng code.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-amber-400/25">
+            <p class="font-bold text-amber-300 text-sm">Step 4: I-embed sa Google Sites</p>
+            <p class="mt-1 text-slate-300">Sa Google Sites ng simbahan, pindutin ang <strong>Insert &rarr; Embed &rarr; By URL</strong> (ilagay ang GitHub Pages URL mo) o <strong>Embed Code</strong> para lumabas nang buo ang interactive card sa loob ng Google Sites.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-amber-400/25">
+            <p class="font-bold text-amber-300 text-sm">Step 5: Gumawa at Mag-print ng Physical Card sa Adobe Photoshop</p>
+            <p class="mt-1 text-slate-300">Pumunta sa Tab 1 (<strong>Photoshop Physical Card</strong>) dito sa modal, i-uncheck ang <em>Show Trim &amp; Safe Zone Guides</em> kapag handa nang mag-export, at i-click ang <strong>Download Front Card</strong> at <strong>Download Back Card (300 DPI PNG)</strong>. Buksan sa Adobe Photoshop (3.5" × 2" with 0.125" bleed, 300 DPI, CMYK/sRGB) at i-save bilang Print PDF/TIFF para maipamigay sa mga miyembro at bisita!</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Code Modal -->
+  <div id="qrModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+    <div class="navy-card rounded-3xl max-w-sm w-full p-6 text-center relative">
+      <button id="closeQrModalBtn" type="button" class="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400">COTG Connect QR</span>
+      <h3 id="modalQrTitle" class="text-lg font-serif-royal font-bold text-white mt-1">Church of the Temple of God</h3>
+      <p class="text-xs text-slate-300 mt-1">Piliin kung link ng card o diretsong vCard contact ang i-encode sa QR code:</p>
+
+      <div class="mt-3 inline-flex p-1 rounded-xl bg-slate-900 border border-slate-800">
+        <button id="qrModeUrlBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs font-semibold gold-gradient-bg text-slate-950 transition">
+          Website / Card Link
+        </button>
+        <button id="qrModeVcardBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition">
+          vCard Contact
+        </button>
+      </div>
+
+      <div class="mt-4 bg-white p-4 rounded-2xl inline-block shadow-lg">
+        <div id="modalQrContainer" class="w-48 h-48 flex items-center justify-center mx-auto"></div>
+      </div>
+
+      <p id="modalQrCaption" class="mt-3 text-xs text-amber-200/90 font-mono truncate px-2">
+        https://www.ctgministries.net
+      </p>
+
+      <div class="mt-5 grid grid-cols-2 gap-2.5">
+        <button id="modalDownloadQrBtn" type="button" class="py-2.5 px-3 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs shadow flex items-center justify-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>Download PNG</span>
+        </button>
+        <button id="modalDownloadVcfBtn" type="button" class="py-2.5 px-3 rounded-xl bg-slate-800 text-amber-300 border border-amber-400/35 font-semibold text-xs hover:bg-slate-700 transition">
+          Download .vcf
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-amber-400/50 text-amber-200 text-xs sm:text-sm font-medium shadow-2xl">
+    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+    <span id="toastMessage">Saved!</span>
+  </div>
+
+  <script>
+    /*__DEFAULT_DATA_START__*/
+    const DEFAULT_APP_STATE = {
+      isPublicReadOnly: true,
+      adminPin: "",
+      globalLogoDataUrl: "",
+      activeCategory: "hq",
+      activeParishIndex: 0,
+      activeMissionIndex: 0,
+      activeMemberIndex: 0,
+      hq: {
+        churchName: "Church of the Temple of God",
+        badgeText: "CTG Headquarters",
+        subtitle: "COTG Central Headquarters • San Gabriel, La Union",
+        roleLine: "Supreme Head & Central Ministry Administration",
+        meta1: "Ama Gideon Abaquita & Ina Josephine Abaquita",
+        meta2: "Jerald Faldas Claro (Ministry Hub & Reports)",
+        meta3: "10 Active Parishes (PH & Hong Kong Chapter)",
+        meta4: "75% Mass Benchmark & 10 Weekly House Visits",
+        verseText: "\"I was glad when they said unto me, Let us go into the house of the LORD.\"",
+        verseRef: "— Psalm 122:1",
+        phone: "+63 917 123 4567",
+        email: "connect@ctgministries.net",
+        website: "https://www.ctgministries.net",
+        address: "Lipay Norte & Poblacion, San Gabriel, La Union, Philippines",
+        sundayTitle: "A.M. & P.M. Holy Mass & Pampamilya",
+        sundayTime: "Sun • 8:30 AM",
+        sundayNote: "Central Temple & All 10 CTG Parishes",
+        midweekTitle: "Online Ministry Preaching & Devotion",
+        midweekTime: "Wed/Fri • 6:00 PM",
+        midweekNote: "Adal ti Evangelio, Orasyon & House Visitation",
+        youthTitle: "Youth & Kids Fellowship • Panagadal",
+        youthTime: "Sat/Sun • 2:00 PM",
+        youthNote: "Agtultuloy na Panagadal & Seminarians Class",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=San+Gabriel+La+Union+Philippines",
+        prayerUrl: "https://www.ctgministries.net",
+        streamUrl: "https://www.youtube.com",
+        fbUrl: "https://www.facebook.com",
+        ytUrl: "https://www.youtube.com",
+        messengerUrl: "https://m.me/",
+        photoDataUrl: ""
+      },
+      parishes: [
+        {
+          id: "lipay-norte",
+          parishLabel: "Lipay Norte",
+          churchName: "Rev. Billy Paquit",
+          badgeText: "Lipay Norte Parish",
+          subtitle: "Church of the Temple of God • Lipay Norte",
+          roleLine: "Parish Priest & Seminarians Facilitator",
+          meta1: "Lipay Norte Parish (San Gabriel, La Union)",
+          meta2: "Zones 1–5 • House Church & Seminarians",
+          meta3: "Sakristan: Rema C. / Chenia P. / Ayesha B.",
+          meta4: "10 Weekly House Visitations & Indoctrination",
+          verseText: "\"Preach the word; be instant in season, out of season; reprove, rebuke, exhort with all longsuffering and doctrine.\"",
+          verseRef: "— 2 Timothy 4:2",
+          phone: "+63 917 101 0001",
+          email: "lipaynorte@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Brgy. Lipay Norte, San Gabriel, La Union, Philippines",
+          sundayTitle: "Holy Mass, Pampamilya & Evangelio",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Lipay Norte Sanctuary • Zones 1 to 5",
+          midweekTitle: "Daily Devotion, Orasyon & House Visit",
+          midweekTime: "Tue/Thu/Fri • 6:00 PM",
+          midweekNote: "Online Family Devotion & 10 House Visitations",
+          youthTitle: "Youth, Kids & Adal Seminarians",
+          youthTime: "Fri/Sun • 2:00 PM",
+          youthNote: "Facilitated by Rev. Billy Paquit & Youth Leaders",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Lipay+Norte+San+Gabriel+La+Union",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "malanas",
+          parishLabel: "Malanas",
+          churchName: "Rev. Billy Paquit & Rev. Rey Jesus B. Macafe",
+          badgeText: "Malanas Parish",
+          subtitle: "Church of the Temple of God • Malanas H.C.",
+          roleLine: "Parish Priest & House Church Ministry",
+          meta1: "Malanas Parish / House Church",
+          meta2: "Co-Coordinator: Christopher Rey Macafe & Leomar Valdez",
+          meta3: "Kids & Youth Fellowship Active Ministry",
+          meta4: "Weekly House Visitation & Evangelio",
+          verseText: "\"For where two or three are gathered together in my name, there am I in the midst of them.\"",
+          verseRef: "— Matthew 18:20",
+          phone: "+63 917 101 0002",
+          email: "malanas@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Malanas, San Gabriel, La Union, Philippines",
+          sundayTitle: "Sunday Mass & Pampamilya Service",
+          sundayTime: "Sun • 9:00 AM",
+          sundayNote: "Malanas House Church Sanctuary",
+          midweekTitle: "Adal ti Evangelio & Online Ministry",
+          midweekTime: "Wed • 6:00 PM",
+          midweekNote: "House Church Devotion & Prayer",
+          youthTitle: "Kids & Youth Fellowship",
+          youthTime: "Sun • 1:30 PM",
+          youthNote: "Bible Stories, Praise Songs & Book Themes",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=San+Gabriel+La+Union+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "poblacion",
+          parishLabel: "Poblacion",
+          churchName: "Msgr. Bella Binabise",
+          badgeText: "Poblacion Parish",
+          subtitle: "Church of the Temple of God • Poblacion",
+          roleLine: "Parish Priest (Msgr. Bella B.)",
+          meta1: "Poblacion Parish (San Gabriel, La Union)",
+          meta2: "Preachers: Msgr. Bella Binabise & Francisca Julian",
+          meta3: "Sakristan: Redford Binabise • Kids Leader: Queen Lyrah P.",
+          meta4: "Active Mass, Pampamilya, Online & Kids Ministry",
+          verseText: "\"Serve the LORD with gladness: come before his presence with singing.\"",
+          verseRef: "— Psalm 100:2",
+          phone: "+63 917 101 0003",
+          email: "poblacion@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Poblacion, San Gabriel, La Union, Philippines",
+          sundayTitle: "Holy Mass, Pampamilya & Evangelio",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Poblacion Parish Sanctuary",
+          midweekTitle: "Online Ministry & Midweek Study",
+          midweekTime: "Wed • 6:00 PM",
+          midweekNote: "Book 5 Themes & Scripture Preaching",
+          youthTitle: "Kids & Youth Fellowship",
+          youthTime: "Sat/Sun • 2:00 PM",
+          youthNote: "Bible Verses, Action Songs & Fellowship",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Poblacion+San+Gabriel+La+Union",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "duplas",
+          parishLabel: "Duplas",
+          churchName: "Rev. Romeo Sanidad",
+          badgeText: "Duplas Parish",
+          subtitle: "Church of the Temple of God • Duplas",
+          roleLine: "Parish Priest (with Msgr. Felicidad Badua)",
+          meta1: "Duplas Parish (San Gabriel, La Union)",
+          meta2: "Senior Clergy: Msgr. Felicidad Badua",
+          meta3: "Sakristan: Darell Sunggay • Epistula: Zoe Sunggay",
+          meta4: "Consistent High Mass Attendance & House Visits",
+          verseText: "\"Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee.\"",
+          verseRef: "— Joshua 1:9",
+          phone: "+63 917 101 0004",
+          email: "duplas@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Brgy. Duplas, San Gabriel, La Union, Philippines",
+          sundayTitle: "Sunday Holy Mass & Pampamilya",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Duplas Parish Sanctuary • Adal ti Evangelio",
+          midweekTitle: "House Visitation & Indoctrination",
+          midweekTime: "Tue/Thu • 4:00 PM",
+          midweekNote: "Family Outreach & Missionary Work",
+          youthTitle: "Youth Fellowship & Liturgical Training",
+          youthTime: "Sat • 3:00 PM",
+          youthNote: "Duplas Youth Ministry",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Duplas+San+Gabriel+La+Union",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "santiago",
+          parishLabel: "Santiago",
+          churchName: "Rev. Fr. Luis Emboltorio",
+          badgeText: "Santiago Parish",
+          subtitle: "Church of the Temple of God • Santiago",
+          roleLine: "Parish Priest (Rev. Luis E.)",
+          meta1: "Santiago Parish Outreach & Sanctuary",
+          meta2: "Sakristan: Louis Angelo Alcantara / Ralph Reofrio",
+          meta3: "Casasaad: Evelyn Alcantara • Epistula: Luisa Millan",
+          meta4: "Active House Visitation & Indoctrination Leader",
+          verseText: "\"Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost.\"",
+          verseRef: "— Matthew 28:19",
+          phone: "+63 917 101 0005",
+          email: "santiago@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Santiago Parish, Ilocos Region, Philippines",
+          sundayTitle: "Sunday Holy Mass & Pampamilya",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Santiago Parish • Adal ti Evangelio",
+          midweekTitle: "House Visitation & Indoctrination",
+          midweekTime: "Wed/Fri • 5:00 PM",
+          midweekNote: "Weekly Missionary Outreach to Families",
+          youthTitle: "Parish Fellowship & Bible Study",
+          youthTime: "Sat • 4:00 PM",
+          youthNote: "Scripture Reading & Intercession",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Santiago+Ilocos+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "caba",
+          parishLabel: "Caba / Baguio",
+          churchName: "Rev. Rolando Claro",
+          badgeText: "Caba / Baguio Parish",
+          subtitle: "Church of the Temple of God • Caba & Baguio",
+          roleLine: "Parish Priest (Rev. Rolando C.)",
+          meta1: "Caba / Baguio & Naguilian Outreach",
+          meta2: "Sakristan & Report Coord: Cristal Castañeda",
+          meta3: "Online MC/Leaders: Vanessa Claro, Nor-enn Wayet, Janelle S.",
+          meta4: "Active Tuesday House Visits & Online Fellowship",
+          verseText: "\"Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.\"",
+          verseRef: "— Matthew 5:16",
+          phone: "+63 917 101 0006",
+          email: "caba@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Caba, La Union & Baguio Mission Area, Philippines",
+          sundayTitle: "Holy Mass, Pampamilya & Evangelio",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Caba Parish Sanctuary & Online Stream",
+          midweekTitle: "Caba Online Fellowship & Tuesday Visit",
+          midweekTime: "Mon/Tue • 7:00 PM",
+          midweekNote: "Evangecube, Book 1 Themes & Naguilian Indoctrination",
+          youthTitle: "Youth & Kids Fellowship",
+          youthTime: "Sat/Sun • 2:00 PM",
+          youthNote: "Caba Youth & Liturgical Team",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Caba+La+Union+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "manila",
+          parishLabel: "Manila / Olongapo",
+          churchName: "Rev. Rodeo Claro",
+          badgeText: "Manila / Olongapo Parish",
+          subtitle: "Church of the Temple of God • Metro Manila",
+          roleLine: "Parish Priest • Preacher: Rev. Gideon Troadio Teodoro Abaquita",
+          meta1: "Manila / Olongapo Parish Chapter",
+          meta2: "Preacher: Rev. Gideon Troadio Teodoro Abaquita & Rev. Dionesio Bongbonga",
+          meta3: "Sakristan: Keeon Vic Paquit & Jeprille Benabise",
+          meta4: "100% Youth & Kids Fellowship • Active House Visits",
+          verseText: "\"For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation to every one that believeth.\"",
+          verseRef: "— Romans 1:16",
+          phone: "+63 917 101 0007",
+          email: "manila@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Metro Manila & Olongapo Mission Area, Philippines",
+          sundayTitle: "Sunday Holy Mass & Pampamilya",
+          sundayTime: "Sun • 9:00 AM",
+          sundayNote: "Manila Sanctuary & Online Broadcast",
+          midweekTitle: "Online Ministry & House Visitation",
+          midweekTime: "Wed/Fri • 7:00 PM",
+          midweekNote: "House Visits & Indoctrination Outreach",
+          youthTitle: "Youth & Kids Fellowship (100% Active)",
+          youthTime: "Sun • 1:30 PM",
+          youthNote: "Metro Manila Youth & Children Ministry",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Manila+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "andabuen",
+          parishLabel: "Andabuen / Capuseran",
+          churchName: "Rev. Joey Bilar",
+          badgeText: "Andabuen Parish",
+          subtitle: "Church of the Temple of God • Andabuen & Capuseran",
+          roleLine: "Parish Priest (Rev. Joey B.)",
+          meta1: "Andabuen & Capuseran Parish",
+          meta2: "Sakristan: Apo Lino C. • Casasaad: Marie T.",
+          meta3: "Capuseran Leaders: Domingo Orenia & Marshall Nello",
+          meta4: "Consistent 10 Weekly House Visitations Leader",
+          verseText: "\"For we are his workmanship, created in Christ Jesus unto good works, which God hath before ordained that we should walk in them.\"",
+          verseRef: "— Ephesians 2:10",
+          phone: "+63 917 101 0008",
+          email: "andabuen@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Andabuen / Capuseran, Isabela, Philippines",
+          sundayTitle: "Holy Mass, Pampamilya & Serbisyo Capuseran",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Andabuen Sanctuary & Capuseran Service",
+          midweekTitle: "10-Family Weekly House Visitation",
+          midweekTime: "Thu/Fri • 4:00 PM",
+          midweekNote: "Dedicated Family Visitation & Prayer Ministry",
+          youthTitle: "Kids Fellowship & Adal ti Evangelio",
+          youthTime: "Sun • 11:00 AM",
+          youthNote: "Scripture Teaching & Youth Guidance",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Andabuen+Benito+Soliven+Isabela",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "apayao",
+          parishLabel: "Apayao",
+          churchName: "Liwliwa C. Tecne",
+          badgeText: "Apayao Parish",
+          subtitle: "Church of the Temple of God • Apayao",
+          roleLine: "Parish Priest / Ministry Leader",
+          meta1: "Apayao Parish & Mission Sanctuary",
+          meta2: "Sakristan: Melchizedek Tecne • Epistula: Sherly Diwayan",
+          meta3: "Evangelio: Meizrhaelle Tecne • Coord: Joey Wangdayan",
+          meta4: "100% Consistent 10 Weekly House Visitations",
+          verseText: "\"If ye abide in me, and my words abide in you, ye shall ask what ye will, and it shall be done unto you.\"",
+          verseRef: "— John 15:7",
+          phone: "+63 917 101 0009",
+          email: "apayao@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Apayao Province, Cordillera Region, Philippines",
+          sundayTitle: "Holy Mass, Pampamilya & Evangelio",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Apayao Sanctuary • Book 2 Themes",
+          midweekTitle: "10-Family House Visit & Home Service",
+          midweekTime: "Sat/Sun • 3:00 PM",
+          midweekNote: "Ilocano Praise Songs, Word & Family Prayer",
+          youthTitle: "Youth & Kids Outreach Fellowship",
+          youthTime: "Sun • 1:00 PM",
+          youthNote: "Apayao Children & Youth Ministry",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Apayao+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "hong-kong",
+          parishLabel: "Hong Kong Chapter",
+          churchName: "COTG Hong Kong Chapter",
+          badgeText: "Hong Kong Chapter",
+          subtitle: "Church of the Temple of God • International",
+          roleLine: "International Fellowship & Online Ministry Chapter",
+          meta1: "Hong Kong Overseas Chapter",
+          meta2: "Coordinators: Mary Jane Claro, Evangeline Claro, Amilyn Binabisi",
+          meta3: "Members: Annajoy B., Mercy C., Rowena C., Grace N., Rose O.",
+          meta4: "Top Performing Chapter in Mass & Online Ministry",
+          verseText: "\"The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.\"",
+          verseRef: "— Psalm 121:8",
+          phone: "+852 9123 4567",
+          email: "hongkong@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Central / Kowloon Fellowship Hub, Hong Kong SAR",
+          sundayTitle: "Sunday Holy Mass & Online Fellowship",
+          sundayTime: "Sun • 10:00 AM HKT",
+          sundayNote: "Hong Kong Chapter Gathering & Live Broadcast",
+          midweekTitle: "Saturday Online Attendance & Prayer",
+          midweekTime: "Sat • 8:00 PM HKT",
+          midweekNote: "Evangecube, Testimony & Intercessory Prayer",
+          youthTitle: "OFW Pastoral Care & Bible Study",
+          youthTime: "Weekly • Online",
+          youthNote: "Connected with CTG Central Headquarters",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Central+Hong+Kong",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        }
+      ],
+      missions: [
+        {
+          id: "house-visitation",
+          presetLabel: "House Visitation (10 Families)",
+          churchName: "CTG House Visitation & Mission",
+          badgeText: "Mission Assignment",
+          subtitle: "Church of the Temple of God • Parish Outreach",
+          roleLine: "Weekly Goal: 10 Families Visited per Parish",
+          meta1: "Assigned Place: Lipay Norte / Caba / Duplas / Apayao",
+          meta2: "Mission Leader: Assigned Parish Priest & Zone Preacher",
+          meta3: "Tema: Book 1 #21–23 & Adal ti Evangelio",
+          meta4: "Program: Opening Prayer, Praise Songs, Word, Prayer Request",
+          verseText: "\"And daily in the temple, and in every house, they ceased not to teach and preach Jesus Christ.\"",
+          verseRef: "— Acts 5:42",
+          phone: "+63 917 123 4567",
+          email: "mission@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Assigned Host Family Residence • CTG Parish Zones",
+          sundayTitle: "House Visitation & Family Blessing",
+          sundayTime: "Tue–Sat • 4:00 PM",
+          sundayNote: "10 Families Weekly Target (Members & Visitors)",
+          midweekTitle: "Missionary Work & Indoctrination",
+          midweekTime: "By Schedule",
+          midweekNote: "Evangecube & Book 1–6 Doctrinal Lessons",
+          youthTitle: "Family Devotion & Orasyon",
+          youthTime: "Daily • 6:00 PM",
+          youthNote: "Morning & Evening Prayer in Every Home",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=San+Gabriel+La+Union+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "indoctrination",
+          presetLabel: "Indoctrination (Book 1–6)",
+          churchName: "CTG Indoctrination Ministry",
+          badgeText: "Doctrinal Mission",
+          subtitle: "Church of the Temple of God • Evangelism",
+          roleLine: "Doctrinal Instruction & Evangecube Mission",
+          meta1: "Target: New Families & Prospective Members",
+          meta2: "Materials: CTG Book 1 to Book 6 & Evangecube",
+          meta3: "Tema: Book 1 #21–23 \"Ti Serkan nga Iglesia Templo\"",
+          meta4: "Coordinator: Parish Priest & Missionary Team",
+          verseText: "\"Take heed unto thyself, and unto the doctrine; continue in them: for in doing this thou shalt both save thyself, and them that hear thee.\"",
+          verseRef: "— 1 Timothy 4:16",
+          phone: "+63 917 123 4567",
+          email: "mission@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "CTG Parish Mission Stations & Home Bible Studies",
+          sundayTitle: "Indoctrination Session (Book 1–6)",
+          sundayTime: "Tue/Thu/Sat • 5:00 PM",
+          sundayNote: "Step-by-Step Doctrinal Study & Testimony",
+          midweekTitle: "Evangecube Gospel Presentation",
+          midweekTime: "Weekly Outreach",
+          midweekNote: "Clear Visual Gospel Sharing for Families",
+          youthTitle: "Welcome to Holy Mass & Pampamilya",
+          youthTime: "Sunday • 8:30 AM",
+          youthNote: "Integration into Parish Worship",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=San+Gabriel+La+Union+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "panagadal-mission",
+          presetLabel: "Agtultuloy na Panagadal",
+          churchName: "Agtultuloy na Panagadal Mission",
+          badgeText: "Leadership & Seminarians",
+          subtitle: "Church of the Temple of God • Education Program",
+          roleLine: "Continuing Leadership & Seminarian Formation",
+          meta1: "Program: Agtultuloy na Panagadal & Adal Seminarians",
+          meta2: "Coordinator: Jerald Faldas Claro & Rev. Billy Paquit",
+          meta3: "Focus: Preaching, Liturgical Officers & Zone Leaders",
+          meta4: "Curriculum: Book 1–6 Theology & Ministry Operations",
+          verseText: "\"Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth.\"",
+          verseRef: "— 2 Timothy 2:15",
+          phone: "+63 917 123 4567",
+          email: "education@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "CTG Central Training Hub • San Gabriel, La Union",
+          sundayTitle: "Leadership & Preachers Formation",
+          sundayTime: "Sat • 2:00 PM",
+          sundayNote: "Equipping Zone Preachers & Mission Workers",
+          midweekTitle: "Adal Seminarians & Liturgical Class",
+          midweekTime: "Fri • 4:00 PM",
+          midweekNote: "Sakristan, Epistula, Evangelio & Casasaad Training",
+          youthTitle: "Digital Ministry & Reporting Workshop",
+          youthTime: "Monthly Session",
+          youthNote: "Parish Weekly Report (PWR) & Ministry Hub",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=San+Gabriel+La+Union+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        }
+      ],
+      members: [
+        {
+          id: "general-member",
+          rolePreset: "Church Member",
+          churchName: "Juan Dela Cruz",
+          badgeText: "COTG Member ID",
+          subtitle: "Church of the Temple of God • Lipay Norte Parish",
+          roleLine: "Active Church Member & Family Devotion Host",
+          meta1: "Home Parish: Lipay Norte Parish (Zone 1)",
+          meta2: "Parish Priest: Rev. Billy Paquit",
+          meta3: "Ministries: Holy Mass, Pampamilya & Evangelio",
+          meta4: "Member ID: COTG-2027-001",
+          verseText: "\"As for me and my house, we will serve the LORD.\"",
+          verseRef: "— Joshua 24:15",
+          phone: "+63 917 555 0101",
+          email: "member@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Brgy. Lipay Norte, San Gabriel, La Union",
+          sundayTitle: "Sunday Holy Mass & Pampamilya",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Regular Parish Communicant & Member",
+          midweekTitle: "Daily Family Devotion & Orasyon",
+          midweekTime: "Daily • 6:00 PM",
+          midweekNote: "Zone Fellowship & House Church",
+          youthTitle: "Adal ti Evangelio & Online Ministry",
+          youthTime: "Wed/Sun",
+          youthNote: "Active Parishioner",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Lipay+Norte+San+Gabriel+La+Union",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "liturgical-officer",
+          rolePreset: "Liturgical Officer (Sakristan / Reader)",
+          churchName: "Cristal Castañeda",
+          badgeText: "Liturgical Officer",
+          subtitle: "Church of the Temple of God • Caba / HQ",
+          roleLine: "Sakristan, Casasaad & Parish Report Coordinator",
+          meta1: "Home Parish: Caba / Baguio Parish",
+          meta2: "Parish Priest: Rev. Rolando Claro",
+          meta3: "Liturgical Duty: Sakristan / Epistula / Casasaad",
+          meta4: "Ministry: Weekly Report Consolidation & Online MC",
+          verseText: "\"Whatsoever ye do, do it heartily, as to the Lord, and not unto men.\"",
+          verseRef: "— Colossians 3:23",
+          phone: "+63 917 555 0102",
+          email: "officers@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Caba & San Gabriel, La Union, Philippines",
+          sundayTitle: "Liturgical Altar & Mass Duty",
+          sundayTime: "Sun • 8:00 AM",
+          sundayNote: "Sakristan, Epistula, Evangelio, Casasaad, Usher",
+          midweekTitle: "Online Fellowship Moderator (MC)",
+          midweekTime: "Mon/Wed • 7:00 PM",
+          midweekNote: "Praise Songs, Evangecube & Prayer",
+          youthTitle: "Parish Weekly Report (PWR) Submission",
+          youthTime: "Saturday • 5:00 PM",
+          youthNote: "CTG Ministry Hub Coordination",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Caba+La+Union+Philippines",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        },
+        {
+          id: "youth-officer",
+          rolePreset: "Youth & Kids Fellowship",
+          churchName: "Chenia Athalie Paquit",
+          badgeText: "Youth & Seminarians",
+          subtitle: "Church of the Temple of God • Lipay Norte",
+          roleLine: "Youth Leader, Moderator & Seminarian Student",
+          meta1: "Home Parish: Lipay Norte Parish",
+          meta2: "Parish Priest: Rev. Billy Paquit",
+          meta3: "Duty: Casasaad, Moderator (MC) & Preacher",
+          meta4: "Program: Youth Fellowship & Adal Seminarians",
+          verseText: "\"Let no man despise thy youth; but be thou an example of the believers, in word, in conversation, in charity, in spirit, in faith, in purity.\"",
+          verseRef: "— 1 Timothy 4:12",
+          phone: "+63 917 555 0103",
+          email: "youth@ctgministries.net",
+          website: "https://www.ctgministries.net",
+          address: "Lipay Norte, San Gabriel, La Union",
+          sundayTitle: "Sunday Mass & Liturgical Service",
+          sundayTime: "Sun • 8:30 AM",
+          sundayNote: "Altar & Casasaad Ministry",
+          midweekTitle: "Adal Martes & Online Family Devotion",
+          midweekTime: "Tue/Wed • 6:00 PM",
+          midweekNote: "Youth Moderator & Opening/Closing Prayer",
+          youthTitle: "Youth Fellowship & Adal Seminarians",
+          youthTime: "Fri/Sun • 2:00 PM",
+          youthNote: "Equipping Next-Generation CTG Leaders",
+          mapsUrl: "https://www.google.com/maps/search/?api=1&query=Lipay+Norte+San+Gabriel+La+Union",
+          prayerUrl: "https://www.ctgministries.net",
+          streamUrl: "https://www.youtube.com",
+          fbUrl: "https://www.facebook.com",
+          ytUrl: "https://www.youtube.com",
+          messengerUrl: "https://m.me/",
+          photoDataUrl: ""
+        }
+      ]
+    };
+    /*__DEFAULT_DATA_END__*/
+
+    const STORAGE_KEY = "cotg_multi_digital_card_v2";
+    let appState = JSON.parse(JSON.stringify(DEFAULT_APP_STATE));
+    let qrMode = "url"; // "url" or "vcard"
+    let isEditorOpen = false;
+    let isScheduleOpen = true;
+    let showBleedGuides = true;
+
+    function loadStoredData() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object" && parsed.hq && Array.isArray(parsed.parishes)) {
+            const lockedFlag = DEFAULT_APP_STATE.isPublicReadOnly;
+            appState = Object.assign({}, JSON.parse(JSON.stringify(DEFAULT_APP_STATE)), parsed);
+            if (lockedFlag) appState.isPublicReadOnly = true;
+          }
+        }
+      } catch (err) {
+        appState = JSON.parse(JSON.stringify(DEFAULT_APP_STATE));
+      }
+    }
+
+    function saveStoredData() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (err) {
+        // Ignore quota or sandbox storage restrictions
+      }
+    }
+
+    function getActiveProfile() {
+      if (appState.activeCategory === "priests") {
+        const idx = Math.max(0, Math.min(appState.activeParishIndex || 0, appState.parishes.length - 1));
+        return appState.parishes[idx];
+      }
+      if (appState.activeCategory === "mission") {
+        const idx = Math.max(0, Math.min(appState.activeMissionIndex || 0, appState.missions.length - 1));
+        return appState.missions[idx];
+      }
+      if (appState.activeCategory === "member") {
+        const idx = Math.max(0, Math.min(appState.activeMemberIndex || 0, appState.members.length - 1));
+        return appState.members[idx];
+      }
+      return appState.hq;
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toastBanner");
+      const text = document.getElementById("toastMessage");
+      if (!toast || !text) return;
+      text.textContent = msg;
+      toast.classList.remove("hidden");
+      toast.classList.add("flex");
+      if (window._toastTimer) clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(function () {
+        toast.classList.add("hidden");
+        toast.classList.remove("flex");
+      }, 3200);
+    }
+
+    function getSafeVcfFilename(profile) {
+      const rawName = (profile.churchName || "Church_of_the_Temple_of_God")
+        .replace(/[^a-zA-Z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+      return (rawName || "COTG_Contact") + ".vcf";
+    }
+
+    function buildVCardString(profile) {
+      const cleanPhone = (profile.phone || "").replace(/[^\d+]/g, "");
+      const scheduleNote =
+        (profile.meta1 ? profile.meta1 + " | " : "") +
+        (profile.meta2 ? profile.meta2 + " | " : "") +
+        "Schedules: " +
+        (profile.sundayTitle || "") + " (" + (profile.sundayTime || "") + ") | " +
+        (profile.midweekTitle || "") + " (" + (profile.midweekTime || "") + ")";
+      const lines = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "FN:" + (profile.churchName || "Church of the Temple of God"),
+        "ORG:Church of the Temple of God;" + (profile.badgeText || "COTG Connect"),
+        "TITLE:" + (profile.roleLine || profile.subtitle || "Church Ministry"),
+        "TEL;TYPE=WORK,VOICE:" + cleanPhone,
+        "EMAIL;TYPE=PREF,INTERNET:" + (profile.email || ""),
+        "URL:" + (profile.website || "https://www.ctgministries.net"),
+        "ADR;TYPE=WORK:;;" + (profile.address || "").replace(/;/g, ",") + ";;;;",
+        "NOTE:" + scheduleNote.replace(/\n/g, " "),
+        "END:VCARD"
+      ];
+      return lines.join("\r\n");
+    }
+
+    function downloadVcfFile() {
+      const profile = getActiveProfile();
+      const filename = getSafeVcfFilename(profile);
+      const vcfContent = buildVCardString(profile);
+      const blob = new Blob([vcfContent], { type: "text/vcard;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(function () {
+        URL.revokeObjectURL(url);
+      }, 1000);
+      showToast("Downloaded " + filename);
+    }
+
+    function renderQrToElement(containerId, textValue, cellSize) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = "";
+      try {
+        if (typeof qrcode === "function") {
+          const qr = qrcode(0, "M");
+          qr.addData(textValue || "https://www.ctgministries.net");
+          qr.make();
+          const moduleCount = qr.getModuleCount();
+          const canvas = document.createElement("canvas");
+          const scale = cellSize || 4;
+          const margin = 2;
+          const size = (moduleCount + margin * 2) * scale;
+          canvas.width = size;
+          canvas.height = size;
+          canvas.style.width = "100%";
+          canvas.style.height = "100%";
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(0, 0, size, size);
+          ctx.fillStyle = "#0A192F";
+          for (let r = 0; r < moduleCount; r++) {
+            for (let c = 0; c < moduleCount; c++) {
+              if (qr.isDark(r, c)) {
+                ctx.fillRect((c + margin) * scale, (r + margin) * scale, scale, scale);
+              }
+            }
+          }
+          container.appendChild(canvas);
+          return;
+        }
+      } catch (e) {
+        // Fallback if text is too long
+      }
+      container.innerHTML = '<div class="text-[11px] text-slate-700 font-semibold p-2 text-center">QR Ready</div>';
+    }
+
+    function renderPhotoshopCards() {
+      const profile = getActiveProfile();
+      const frontCanvas = document.getElementById("photoshopFrontCanvas");
+      const backCanvas = document.getElementById("photoshopBackCanvas");
+      if (!frontCanvas || !backCanvas) return;
+
+      // 1125 x 675 px (3.5" x 2" at 300 DPI + 0.125" bleed = 3.75" x 2.25")
+      const W = 1125;
+      const H = 675;
+      const bleed = 38; // 0.125 inch at 300 DPI
+      const safe = 75;  // 0.25 inch safe margin
+
+      // --- FRONT CARD ---
+      const fctx = frontCanvas.getContext("2d");
+      const fGrad = fctx.createLinearGradient(0, 0, W, H);
+      fGrad.addColorStop(0, "#132A4F");
+      fGrad.addColorStop(0.55, "#0A192F");
+      fGrad.addColorStop(1, "#061020");
+      fctx.fillStyle = fGrad;
+      fctx.fillRect(0, 0, W, H);
+
+      // Gold ornamental frame
+      fctx.strokeStyle = "#D4AF37";
+      fctx.lineWidth = 4;
+      fctx.strokeRect(safe - 12, safe - 12, W - (safe - 12) * 2, H - (safe - 12) * 2);
+      fctx.strokeStyle = "rgba(212, 175, 55, 0.35)";
+      fctx.lineWidth = 2;
+      fctx.strokeRect(safe - 4, safe - 4, W - (safe - 4) * 2, H - (safe - 4) * 2);
+
+      // Top Ministry Pill Text
+      fctx.fillStyle = "#E5C158";
+      fctx.font = "bold 22px Inter, sans-serif";
+      fctx.fillText("CHURCH OF THE TEMPLE OF GOD • " + (profile.badgeText || "COTG CONNECT").toUpperCase(), safe + 24, safe + 48);
+
+      // Main Name
+      fctx.fillStyle = "#FFF3C4";
+      fctx.font = "bold 44px Cinzel, Georgia, serif";
+      fctx.fillText((profile.churchName || "Church of the Temple of God").slice(0, 36), safe + 24, safe + 115);
+
+      // Role & Subtitle
+      fctx.fillStyle = "#D4AF37";
+      fctx.font = "600 25px Inter, sans-serif";
+      fctx.fillText((profile.roleLine || profile.subtitle || "").slice(0, 52), safe + 24, safe + 158);
+
+      // Divider line
+      fctx.fillStyle = "rgba(212, 175, 55, 0.45)";
+      fctx.fillRect(safe + 24, safe + 182, W - (safe + 24) * 2, 2);
+
+      // Meta / Parish Info
+      fctx.fillStyle = "#E2E8F0";
+      fctx.font = "500 22px Inter, sans-serif";
+      fctx.fillText("• " + (profile.meta1 || ""), safe + 24, safe + 230);
+      fctx.fillText("• " + (profile.meta2 || ""), safe + 24, safe + 268);
+      fctx.fillText("• " + (profile.sundayTitle || "Sunday Mass") + ": " + (profile.sundayTime || "8:30 AM"), safe + 24, safe + 306);
+
+      // Bottom Contact Bar
+      fctx.fillStyle = "#F7E7B4";
+      fctx.font = "bold 23px Inter, sans-serif";
+      fctx.fillText("Tel: " + (profile.phone || "") + "   |   " + (profile.email || ""), safe + 24, H - safe - 55);
+      fctx.fillStyle = "#94A3B8";
+      fctx.font = "500 20px Inter, sans-serif";
+      fctx.fillText((profile.address || "") + " • " + (profile.website || "www.ctgministries.net"), safe + 24, H - safe - 20);
+
+      // --- BACK CARD ---
+      const bctx = backCanvas.getContext("2d");
+      bctx.fillStyle = fGrad;
+      bctx.fillRect(0, 0, W, H);
+
+      bctx.strokeStyle = "#D4AF37";
+      bctx.lineWidth = 4;
+      bctx.strokeRect(safe - 12, safe - 12, W - (safe - 12) * 2, H - (safe - 12) * 2);
+
+      // Left side text on Back Card
+      bctx.fillStyle = "#FFF3C4";
+      bctx.font = "bold 34px Cinzel, Georgia, serif";
+      bctx.fillText("CHURCH OF THE TEMPLE OF GOD", safe + 28, safe + 85);
+
+      bctx.fillStyle = "#D4AF37";
+      bctx.font = "bold 24px Inter, sans-serif";
+      bctx.fillText((profile.subtitle || "COTG Connect Digital Calling Card").slice(0, 44), safe + 28, safe + 128);
+
+      bctx.fillStyle = "#E2E8F0";
+      bctx.font = "italic 21px Inter, sans-serif";
+      const verseShort = (profile.verseText || "").slice(0, 62);
+      const verseRest = (profile.verseText || "").slice(62, 124);
+      bctx.fillText(verseShort, safe + 28, safe + 190);
+      if (verseRest) {
+        bctx.fillText(verseRest + (profile.verseText.length > 124 ? "..." : ""), safe + 28, safe + 222);
+      }
+      bctx.fillStyle = "#E5C158";
+      bctx.font = "bold 20px Inter, sans-serif";
+      bctx.fillText(profile.verseRef || "— Psalm 122:1", safe + 28, safe + 260);
+
+      bctx.fillStyle = "#CBD5E1";
+      bctx.font = "500 21px Inter, sans-serif";
+      bctx.fillText("Scan QR code with your phone camera", safe + 28, H - safe - 80);
+      bctx.fillText("to save contact (.vcf) & view schedules.", safe + 28, H - safe - 48);
+
+      // Draw QR Code on right side of Back Card
+      try {
+        if (typeof qrcode === "function") {
+          const qr = qrcode(0, "M");
+          const payload = qrMode === "vcard" ? buildVCardString(profile) : (profile.website || "https://www.ctgministries.net");
+          qr.addData(payload);
+          qr.make();
+          const count = qr.getModuleCount();
+          const qrBoxSize = 320;
+          const qrX = W - safe - qrBoxSize - 35;
+          const qrY = Math.round((H - qrBoxSize) / 2);
+
+          bctx.fillStyle = "#FFFFFF";
+          bctx.fillRect(qrX - 16, qrY - 16, qrBoxSize + 32, qrBoxSize + 32);
+
+          const cell = qrBoxSize / count;
+          bctx.fillStyle = "#0A192F";
+          for (let r = 0; r < count; r++) {
+            for (let c = 0; c < count; c++) {
+              if (qr.isDark(r, c)) {
+                bctx.fillRect(qrX + c * cell, qrY + r * cell, Math.ceil(cell), Math.ceil(cell));
+              }
+            }
+          }
+        }
+      } catch (err) {
+        // Ignore QR canvas error
+      }
+
+      // Optional Trim & Bleed Guides for Photoshop
+      if (showBleedGuides) {
+        [fctx, bctx].forEach(function (ctx) {
+          ctx.save();
+          ctx.setLineDash([10, 8]);
+          // Red Trim Line (3.5" x 2.0" cut line)
+          ctx.strokeStyle = "rgba(244, 63, 94, 0.75)";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(bleed, bleed, W - bleed * 2, H - bleed * 2);
+          // Cyan Safe Zone Line
+          ctx.strokeStyle = "rgba(56, 189, 248, 0.65)";
+          ctx.strokeRect(safe, safe, W - safe * 2, H - safe * 2);
+          ctx.restore();
+        });
+      }
+    }
+
+    function updateAllQrCodes() {
+      const profile = getActiveProfile();
+      const payload = qrMode === "vcard"
+        ? buildVCardString(profile)
+        : (profile.website || "https://www.ctgministries.net");
+
+      renderQrToElement("inlineQrContainer", payload, 4);
+      renderQrToElement("modalQrContainer", payload, 6);
+      renderPhotoshopCards();
+
+      const inlineModeLabel = document.getElementById("inlineQrModeLabel");
+      if (inlineModeLabel) {
+        inlineModeLabel.textContent = qrMode === "vcard" ? "vCard Contact" : "Card URL";
+      }
+
+      const modalCaption = document.getElementById("modalQrCaption");
+      if (modalCaption) {
+        modalCaption.textContent = qrMode === "vcard"
+          ? "Direct vCard (" + profile.churchName + ")"
+          : (profile.website || "https://www.ctgministries.net");
+      }
+
+      const urlBtn = document.getElementById("qrModeUrlBtn");
+      const vcardBtn = document.getElementById("qrModeVcardBtn");
+      if (urlBtn && vcardBtn) {
+        if (qrMode === "url") {
+          urlBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold gold-gradient-bg text-slate-950 transition";
+          vcardBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition";
+        } else {
+          vcardBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold gold-gradient-bg text-slate-950 transition";
+          urlBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition";
+        }
+      }
+
+      const embedBox = document.getElementById("googleSitesEmbedTextarea");
+      if (embedBox) {
+        const siteUrl = profile.website || "https://ctgaiagent.github.io/cotg-connect/";
+        embedBox.value = '<iframe src="' + siteUrl + '" width="100%" height="880" style="border:0; border-radius:24px; max-width:460px; margin:0 auto; display:block;" loading="lazy" referrerpolicy="no-referrer"></iframe>';
+      }
+    }
+
+    function downloadQrPng(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const canvas = container.querySelector("canvas");
+      if (!canvas) {
+        showToast("QR code is not ready yet.");
+        return;
+      }
+      const profile = getActiveProfile();
+      const cleanName = (profile.churchName || "COTG").replace(/[^a-zA-Z0-9]+/g, "_");
+      const dataUrl = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = cleanName + "_QR.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast("Downloaded " + cleanName + "_QR.png");
+    }
+
+    function downloadHiResQrForPhotoshop() {
+      const profile = getActiveProfile();
+      const payload = qrMode === "vcard"
+        ? buildVCardString(profile)
+        : (profile.website || "https://www.ctgministries.net");
+      if (typeof qrcode !== "function") return;
+      const qr = qrcode(0, "H");
+      qr.addData(payload);
+      qr.make();
+      const count = qr.getModuleCount();
+      const size = 1000;
+      const margin = 60;
+      const canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillRect(0, 0, size, size);
+      ctx.fillStyle = "#0A192F";
+      const cell = (size - margin * 2) / count;
+      for (let r = 0; r < count; r++) {
+        for (let c = 0; c < count; c++) {
+          if (qr.isDark(r, c)) {
+            ctx.fillRect(margin + c * cell, margin + r * cell, Math.ceil(cell), Math.ceil(cell));
+          }
+        }
+      }
+      const cleanName = (profile.churchName || "COTG").replace(/[^a-zA-Z0-9]+/g, "_");
+      const a = document.createElement("a");
+      a.href = canvas.toDataURL("image/png");
+      a.download = cleanName + "_1000px_Photoshop_QR.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast("Downloaded 1000x1000px QR for Photoshop!");
+    }
+
+    function renderNavigationBars() {
+      const adminToolbar = document.getElementById("adminToolbar");
+      const emblemUploadBtn = document.getElementById("emblemUploadBtn");
+      if (adminToolbar) {
+        adminToolbar.classList.toggle("hidden", Boolean(appState.isPublicReadOnly));
+      }
+      if (emblemUploadBtn) {
+        emblemUploadBtn.classList.toggle("hidden", Boolean(appState.isPublicReadOnly));
+      }
+
+      const catButtons = {
+        hq: document.getElementById("catTabHq"),
+        priests: document.getElementById("catTabPriests"),
+        mission: document.getElementById("catTabMission"),
+        member: document.getElementById("catTabMember")
+      };
+
+      const activeClass = "px-3 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition gold-gradient-bg text-slate-950 shadow";
+      const inactiveClass = "px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition bg-slate-900/90 text-slate-200 border border-amber-500/25 hover:border-amber-400/60";
+
+      Object.keys(catButtons).forEach(function (key) {
+        const btn = catButtons[key];
+        if (!btn) return;
+        btn.className = appState.activeCategory === key ? activeClass : inactiveClass;
+      });
+
+      const parishBar = document.getElementById("parishSelectorBar");
+      const missionBar = document.getElementById("missionSelectorBar");
+      const memberBar = document.getElementById("memberSelectorBar");
+
+      if (parishBar) parishBar.classList.toggle("hidden", appState.activeCategory !== "priests");
+      if (missionBar) missionBar.classList.toggle("hidden", appState.activeCategory !== "mission");
+      if (memberBar) memberBar.classList.toggle("hidden", appState.activeCategory !== "member");
+
+      // Populate Parish Dropdown & Chips
+      const dropdown = document.getElementById("parishSelectDropdown");
+      const chipsContainer = document.getElementById("parishQuickChips");
+      if (dropdown && chipsContainer) {
+        dropdown.innerHTML = "";
+        chipsContainer.innerHTML = "";
+        appState.parishes.forEach(function (p, index) {
+          const opt = document.createElement("option");
+          opt.value = String(index);
+          opt.textContent = (index + 1) + ". " + p.parishLabel + " — " + p.churchName;
+          if (index === appState.activeParishIndex) opt.selected = true;
+          dropdown.appendChild(opt);
+
+          const chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = index === appState.activeParishIndex
+            ? "px-2.5 py-1 rounded-lg text-[11px] font-bold gold-gradient-bg text-slate-950 shrink-0 shadow"
+            : "px-2.5 py-1 rounded-lg text-[11px] font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-amber-400/40 shrink-0";
+          chip.textContent = p.parishLabel;
+          chip.addEventListener("click", function () {
+            appState.activeParishIndex = index;
+            saveStoredData();
+            renderNavigationBars();
+            populateEditorInputs();
+            renderCardView();
+          });
+          chipsContainer.appendChild(chip);
+        });
+      }
+
+      // Populate Mission Chips
+      const missionChips = document.getElementById("missionQuickChips");
+      if (missionChips) {
+        missionChips.innerHTML = "";
+        appState.missions.forEach(function (m, index) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = index === appState.activeMissionIndex
+            ? "px-3 py-1 rounded-lg text-xs font-bold gold-gradient-bg text-slate-950 shadow"
+            : "px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-amber-400/40";
+          btn.textContent = m.presetLabel;
+          btn.addEventListener("click", function () {
+            appState.activeMissionIndex = index;
+            saveStoredData();
+            renderNavigationBars();
+            populateEditorInputs();
+            renderCardView();
+          });
+          missionChips.appendChild(btn);
+        });
+      }
+
+      // Populate Member Role Chips
+      const memberChips = document.getElementById("memberRoleChips");
+      if (memberChips) {
+        memberChips.innerHTML = "";
+        appState.members.forEach(function (mem, index) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = index === appState.activeMemberIndex
+            ? "px-3 py-1 rounded-lg text-xs font-bold gold-gradient-bg text-slate-950 shrink-0 shadow"
+            : "px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-amber-400/40 shrink-0";
+          btn.textContent = mem.rolePreset;
+          btn.addEventListener("click", function () {
+            appState.activeMemberIndex = index;
+            saveStoredData();
+            renderNavigationBars();
+            populateEditorInputs();
+            renderCardView();
+          });
+          memberChips.appendChild(btn);
+        });
+      }
+    }
+
+    function renderCardView() {
+      const profile = getActiveProfile();
+      const setText = function (id, val) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
+
+      setText("displayChurchName", profile.churchName);
+      setText("modalQrTitle", profile.churchName);
+      setText("displaySubtitle", profile.subtitle);
+      setText("displayRoleLine", profile.roleLine || "");
+      setText("displayVerseText", profile.verseText);
+      setText("displayVerseRef", profile.verseRef);
+      setText("displaySundayTitle", profile.sundayTitle);
+      setText("displaySundayTime", profile.sundayTime);
+      setText("displaySundayNote", profile.sundayNote);
+      setText("displayMidweekTitle", profile.midweekTitle);
+      setText("displayMidweekTime", profile.midweekTime);
+      setText("displayMidweekNote", profile.midweekNote);
+      setText("displayYouthTitle", profile.youthTitle);
+      setText("displayYouthTime", profile.youthTime);
+      setText("displayYouthNote", profile.youthNote);
+      setText("displayAddressText", profile.address);
+      setText("displayFooterPhone", (profile.phone || "") + " • " + (profile.email || ""));
+
+      const catNames = {
+        hq: "CTG Headquarters",
+        priests: "Parish Priest • " + (profile.parishLabel || ""),
+        mission: "Mission & Evangelism",
+        member: "Church Member / Officer"
+      };
+      setText("activeCategoryPill", "Active: " + (catNames[appState.activeCategory] || "COTG Connect"));
+      setText("editorActiveCategoryLabel", "Live Customizer • " + (catNames[appState.activeCategory] || "COTG"));
+
+      const vcfBtnLabel = document.getElementById("saveVcfBtnLabel");
+      if (vcfBtnLabel) {
+        if (appState.activeCategory === "priests") {
+          vcfBtnLabel.textContent = "Save Parish Priest Contact (.vcf)";
+        } else if (appState.activeCategory === "mission") {
+          vcfBtnLabel.textContent = "Save Mission Team Contact (.vcf)";
+        } else if (appState.activeCategory === "member") {
+          vcfBtnLabel.textContent = "Save Member Contact (.vcf)";
+        } else {
+          vcfBtnLabel.textContent = "Save HQ Contact (.vcf)";
+        }
+      }
+
+      setText("vcfFilenamePreview", getSafeVcfFilename(profile));
+
+      // Emblem / Uploaded Image logic
+      const customLogoImg = document.getElementById("customLogoImg");
+      const defaultEmblemSvg = document.getElementById("defaultEmblemSvg");
+      const activeImageSrc = profile.photoDataUrl || appState.globalLogoDataUrl || "";
+      if (customLogoImg && defaultEmblemSvg) {
+        if (activeImageSrc) {
+          customLogoImg.src = activeImageSrc;
+          customLogoImg.classList.remove("hidden");
+          defaultEmblemSvg.classList.add("hidden");
+        } else {
+          customLogoImg.classList.add("hidden");
+          defaultEmblemSvg.classList.remove("hidden");
+        }
+      }
+
+      // Context Highlight Box
+      const highlightHeader = document.getElementById("contextHighlightHeader");
+      const highlightTag = document.getElementById("contextHighlightTag");
+      const highlightRows = document.getElementById("contextHighlightRows");
+
+      if (highlightHeader && highlightTag && highlightRows) {
+        if (appState.activeCategory === "priests") {
+          highlightHeader.textContent = "Parish Priest & Liturgical Oversight";
+          highlightTag.textContent = profile.parishLabel || "CTG Parish";
+        } else if (appState.activeCategory === "mission") {
+          highlightHeader.textContent = "Mission & Visitation Assignment Pass";
+          highlightTag.textContent = profile.presetLabel || "CTG Mission";
+        } else if (appState.activeCategory === "member") {
+          highlightHeader.textContent = "Church Member & Liturgical Credentials";
+          highlightTag.textContent = profile.rolePreset || "CTG Member";
+        } else {
+          highlightHeader.textContent = "Headquarters Leadership & Oversight";
+          highlightTag.textContent = "10 Active Parishes";
+        }
+
+        const metas = [profile.meta1, profile.meta2, profile.meta3, profile.meta4].filter(Boolean);
+        highlightRows.innerHTML = metas.map(function (item) {
+          const safeText = String(item).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          return '<div class="flex items-start gap-2 text-slate-200">' +
+            '<span class="text-amber-400 mt-0.5">•</span>' +
+            '<span>' + safeText + '</span>' +
+          '</div>';
+        }).join("");
+      }
+
+      const badgeEl = document.getElementById("cardBadgeText");
+      if (badgeEl) {
+        badgeEl.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> ' +
+          (profile.badgeText || "COTG Connect").replace(/</g, "&lt;");
+      }
+
+      const cleanTel = (profile.phone || "").replace(/[^\d+]/g, "");
+      const callLink = document.getElementById("quickCallLink");
+      if (callLink) callLink.href = "tel:" + (cleanTel || "+639171234567");
+
+      const emailLink = document.getElementById("quickEmailLink");
+      if (emailLink) emailLink.href = "mailto:" + (profile.email || "connect@ctgministries.net");
+
+      const webLink = document.getElementById("quickWebsiteLink");
+      if (webLink) webLink.href = profile.website || "https://www.ctgministries.net";
+
+      const mapsBtn = document.getElementById("mapsActionBtn");
+      if (mapsBtn) mapsBtn.href = profile.mapsUrl || "https://www.google.com/maps";
+
+      const prayerBtn = document.getElementById("prayerActionBtn");
+      if (prayerBtn) prayerBtn.href = profile.prayerUrl || "https://www.ctgministries.net";
+
+      const streamBtn = document.getElementById("streamActionBtn");
+      if (streamBtn) streamBtn.href = profile.streamUrl || "https://www.youtube.com";
+
+      const fbLink = document.getElementById("socialFbLink");
+      if (fbLink) fbLink.href = profile.fbUrl || "https://www.facebook.com";
+
+      const ytLink = document.getElementById("socialYtLink");
+      if (ytLink) ytLink.href = profile.ytUrl || "https://www.youtube.com";
+
+      const msgLink = document.getElementById("socialMessengerLink");
+      if (msgLink) msgLink.href = profile.messengerUrl || "https://m.me/";
+
+      updateAllQrCodes();
+    }
+
+    function updateEditorFieldLabels() {
+      const setLabel = function (id, text) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+      };
+
+      if (appState.activeCategory === "priests") {
+        setLabel("labelChurchName", "Parish Priest Name");
+        setLabel("editorContextBoxTitle", "Parish & Liturgical Officer Details");
+        setLabel("labelMeta1", "Parish Name & Municipality");
+        setLabel("labelMeta2", "Zones / Co-Preachers");
+        setLabel("labelMeta3", "Liturgical Officers (Sakristan/Epistula)");
+        setLabel("labelMeta4", "Parish Highlight / Visitation Goal");
+      } else if (appState.activeCategory === "mission") {
+        setLabel("labelChurchName", "Mission Title / Team Name");
+        setLabel("editorContextBoxTitle", "Mission Assignment & Tema Details");
+        setLabel("labelMeta1", "Assigned Place / Host Family");
+        setLabel("labelMeta2", "Mission Leader / Preacher");
+        setLabel("labelMeta3", "Book & Tema (e.g. Book 1 #21)");
+        setLabel("labelMeta4", "Program / Moderator (MC, OP, CP)");
+      } else if (appState.activeCategory === "member") {
+        setLabel("labelChurchName", "Church Member Full Name");
+        setLabel("editorContextBoxTitle", "Member & Liturgical Officer Credentials");
+        setLabel("labelMeta1", "Home Parish & Zone");
+        setLabel("labelMeta2", "Parish Priest");
+        setLabel("labelMeta3", "Liturgical Role / Ministry");
+        setLabel("labelMeta4", "Member ID / Emergency Note");
+      } else {
+        setLabel("labelChurchName", "Church / Headquarters Name");
+        setLabel("editorContextBoxTitle", "CTG Headquarters Details");
+        setLabel("labelMeta1", "Supreme Head / Central Leadership");
+        setLabel("labelMeta2", "Administration / Report Coordinator");
+        setLabel("labelMeta3", "Parishes & Chapters Scope");
+        setLabel("labelMeta4", "Core Ministry Benchmarks");
+      }
+    }
+
+    const EDITOR_FIELD_KEYS = {
+      inputChurchName: "churchName",
+      inputBadgeText: "badgeText",
+      inputSubtitle: "subtitle",
+      inputRoleLine: "roleLine",
+      inputMeta1: "meta1",
+      inputMeta2: "meta2",
+      inputMeta3: "meta3",
+      inputMeta4: "meta4",
+      inputVerseText: "verseText",
+      inputVerseRef: "verseRef",
+      inputPhone: "phone",
+      inputEmail: "email",
+      inputWebsite: "website",
+      inputAddress: "address",
+      inputSundayTitle: "sundayTitle",
+      inputSundayTime: "sundayTime",
+      inputSundayNote: "sundayNote",
+      inputMidweekTitle: "midweekTitle",
+      inputMidweekTime: "midweekTime",
+      inputMidweekNote: "midweekNote",
+      inputYouthTitle: "youthTitle",
+      inputYouthTime: "youthTime",
+      inputYouthNote: "youthNote",
+      inputMapsUrl: "mapsUrl",
+      inputPrayerUrl: "prayerUrl",
+      inputStreamUrl: "streamUrl",
+      inputFbUrl: "fbUrl",
+      inputYtUrl: "ytUrl",
+      inputMessengerUrl: "messengerUrl"
+    };
+
+    function populateEditorInputs() {
+      updateEditorFieldLabels();
+      const profile = getActiveProfile();
+      Object.keys(EDITOR_FIELD_KEYS).forEach(function (inputId) {
+        const inputEl = document.getElementById(inputId);
+        const key = EDITOR_FIELD_KEYS[inputId];
+        if (inputEl) {
+          inputEl.value = profile[key] || "";
+        }
+      });
+      const logoUrlInput = document.getElementById("inputLogoUrl");
+      if (logoUrlInput) {
+        const currentImg = profile.photoDataUrl || appState.globalLogoDataUrl || "";
+        logoUrlInput.value = currentImg.indexOf("data:") === 0 ? "" : currentImg;
+      }
+    }
+
+    function bindEditorInputListeners() {
+      Object.keys(EDITOR_FIELD_KEYS).forEach(function (inputId) {
+        const inputEl = document.getElementById(inputId);
+        const key = EDITOR_FIELD_KEYS[inputId];
+        if (inputEl) {
+          inputEl.addEventListener("input", function (e) {
+            const profile = getActiveProfile();
+            profile[key] = e.target.value;
+            saveStoredData();
+            renderNavigationBars();
+            renderCardView();
+          });
+        }
+      });
+
+      const logoUrlInput = document.getElementById("inputLogoUrl");
+      if (logoUrlInput) {
+        logoUrlInput.addEventListener("input", function (e) {
+          const val = e.target.value.trim();
+          appState.globalLogoDataUrl = val;
+          saveStoredData();
+          renderCardView();
+        });
+      }
+    }
+
+    function handleImageFileUpload(file, applyGlobally) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (evt) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement("canvas");
+          const maxDim = 320;
+          let w = img.width;
+          let h = img.height;
+          if (w > h && w > maxDim) {
+            h = Math.round((h * maxDim) / w);
+            w = maxDim;
+          } else if (h >= w && h > maxDim) {
+            w = Math.round((w * maxDim) / h);
+            h = maxDim;
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, w, h);
+          const dataUrl = canvas.toDataURL("image/png", 0.9);
+          if (applyGlobally) {
+            appState.globalLogoDataUrl = dataUrl;
+            showToast("Church Logo applied to all COTG cards!");
+          } else {
+            const profile = getActiveProfile();
+            profile.photoDataUrl = dataUrl;
+            showToast("Photo updated for " + profile.churchName);
+          }
+          saveStoredData();
+          renderCardView();
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function toggleEditor(forceState) {
+      isEditorOpen = typeof forceState === "boolean" ? forceState : !isEditorOpen;
+      const editorPanel = document.getElementById("editorPanel");
+      const workspaceGrid = document.getElementById("workspaceGrid");
+      const label = document.getElementById("toggleEditorLabel");
+
+      if (!editorPanel || !workspaceGrid) return;
+
+      if (isEditorOpen) {
+        editorPanel.classList.remove("hidden");
+        workspaceGrid.className = "grid grid-cols-1 lg:grid-cols-12 gap-8 items-start";
+        editorPanel.parentElement.firstElementChild.className = "w-full max-w-md mx-auto lg:col-span-5";
+        editorPanel.className = "w-full max-w-xl mx-auto lg:col-span-7 navy-card rounded-3xl p-5 sm:p-6";
+        if (label) label.textContent = "Close Editor";
+      } else {
+        editorPanel.classList.add("hidden");
+        workspaceGrid.className = "grid grid-cols-1 gap-8 items-start justify-items-center";
+        editorPanel.parentElement.firstElementChild.className = "w-full max-w-md mx-auto";
+        if (label) label.textContent = "Edit Church Info";
+      }
+    }
+
+    function downloadCustomizedHtml(makePublicReadOnly) {
+      const exportState = JSON.parse(JSON.stringify(appState));
+      exportState.isPublicReadOnly = Boolean(makePublicReadOnly);
+
+      const currentDoc = document.documentElement.outerHTML;
+      const replacementBlock =
+        "/*__DEFAULT_DATA_START__*/\n    const DEFAULT_APP_STATE = " +
+        JSON.stringify(exportState, null, 6) +
+        ";\n    /*__DEFAULT_DATA_END__*/";
+
+      const updatedHtml = "<!DOCTYPE html>\n" + currentDoc.replace(
+        /\/\*__DEFAULT_DATA_START__\*\/[\s\S]*?\/\*__DEFAULT_DATA_END__\*\//,
+        replacementBlock
+      );
+
+      const blob = new Blob([updatedHtml], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "index.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () {
+        URL.revokeObjectURL(url);
+      }, 1000);
+      showToast(makePublicReadOnly
+        ? "Downloaded Public Read-Only index.html (Safe for GitHub Pages)!"
+        : "Downloaded Master Admin index.html (for VS Code)!");
+    }
+
+    function downloadServiceWorkerFile() {
+      const swCode = [
+        "const CACHE_NAME = 'cotg-connect-offline-v1';",
+        "const ASSETS = [",
+        "  './',",
+        "  './index.html',",
+        "  './manifest.json',",
+        "  'https://cdn.tailwindcss.com/3.4.17',",
+        "  'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js'",
+        "];",
+        "self.addEventListener('install', (event) => {",
+        "  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));",
+        "  self.skipWaiting();",
+        "});",
+        "self.addEventListener('activate', (event) => {",
+        "  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.map((k) => k !== CACHE_NAME && caches.delete(k)))));",
+        "  self.clients.claim();",
+        "});",
+        "self.addEventListener('fetch', (event) => {",
+        "  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request).then((resp) => {",
+        "    const copy = resp.clone();",
+        "    caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));",
+        "    return resp;",
+        "  }).catch(() => caches.match('./index.html'))));",
+        "});"
+      ].join("\n");
+      const blob = new Blob([swCode], { type: "application/javascript;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "sw.js";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast("Downloaded sw.js for Offline PWA!");
+    }
+
+    function downloadManifestFile() {
+      const manifestObj = {
+        name: "Church of the Temple of God — COTG Connect",
+        short_name: "COTG Connect",
+        description: "Interactive Digital Calling Card for CTG Headquarters, 10 Parishes, Mission & Church Members",
+        start_url: "./index.html",
+        display: "standalone",
+        background_color: "#0A192F",
+        theme_color: "#D4AF37",
+        icons: [
+          {
+            src: appState.globalLogoDataUrl || "https://www.ctgministries.net/favicon.ico",
+            sizes: "192x192",
+            type: "image/png"
+          }
+        ]
+      };
+      const blob = new Blob([JSON.stringify(manifestObj, null, 2)], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "manifest.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast("Downloaded manifest.json!");
+    }
+
+    function copyTextFallback(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast("Copied to clipboard!");
+      } catch (err) {
+        showToast("Copied!");
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function switchCategory(cat) {
+      appState.activeCategory = cat;
+      saveStoredData();
+      renderNavigationBars();
+      populateEditorInputs();
+      renderCardView();
+    }
+
+    function switchStudioTab(tabName) {
+      const tabs = ["Photoshop", "Security", "Offline", "Steps"];
+      tabs.forEach(function (t) {
+        const btn = document.getElementById("studioTab" + t);
+        const panel = document.getElementById("panel" + t);
+        if (btn) {
+          btn.className = t === tabName
+            ? "px-3 py-2 rounded-xl text-xs font-bold gold-gradient-bg text-slate-950"
+            : "px-3 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-700";
+        }
+        if (panel) {
+          panel.classList.toggle("hidden", t !== tabName);
+        }
+      });
+      if (tabName === "Photoshop") {
+        renderPhotoshopCards();
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", function () {
+      loadStoredData();
+      bindEditorInputListeners();
+      renderNavigationBars();
+      populateEditorInputs();
+      renderCardView();
+
+      // Register Service Worker when hosted over HTTPS or localhost
+      if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+        navigator.serviceWorker.register("./sw.js").catch(function () {});
+      }
+
+      // Online / Offline indicator
+      const updateNetStatus = function () {
+        const badge = document.getElementById("networkStatusBadge");
+        if (!badge) return;
+        if (navigator.onLine) {
+          badge.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30";
+          badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online &amp; Offline Ready';
+        } else {
+          badge.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/30";
+          badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Offline Mode Active';
+        }
+      };
+      window.addEventListener("online", updateNetStatus);
+      window.addEventListener("offline", updateNetStatus);
+
+      // Secret keyboard shortcut Ctrl+Shift+E to unlock Admin Toolbar if in Public Read-Only mode
+      window.addEventListener("keydown", function (e) {
+        if (e.ctrlKey && e.shiftKey && (e.key === "E" || e.key === "e")) {
+          appState.isPublicReadOnly = false;
+          renderNavigationBars();
+          showToast("Admin Toolbar Unlocked!");
+        }
+      });
+
+      // Category Tab Buttons
+      const catTabHq = document.getElementById("catTabHq");
+      if (catTabHq) catTabHq.addEventListener("click", function () { switchCategory("hq"); });
+
+      const catTabPriests = document.getElementById("catTabPriests");
+      if (catTabPriests) catTabPriests.addEventListener("click", function () { switchCategory("priests"); });
+
+      const catTabMission = document.getElementById("catTabMission");
+      if (catTabMission) catTabMission.addEventListener("click", function () { switchCategory("mission"); });
+
+      const catTabMember = document.getElementById("catTabMember");
+      if (catTabMember) catTabMember.addEventListener("click", function () { switchCategory("member"); });
+
+      // Parish Dropdown Change
+      const parishDropdown = document.getElementById("parishSelectDropdown");
+      if (parishDropdown) {
+        parishDropdown.addEventListener("change", function (e) {
+          appState.activeParishIndex = parseInt(e.target.value, 10) || 0;
+          saveStoredData();
+          renderNavigationBars();
+          populateEditorInputs();
+          renderCardView();
+        });
+      }
+
+      // Studio Modal Controls
+      const studioModal = document.getElementById("studioModal");
+      const openStudioModalBtn = document.getElementById("openStudioModalBtn");
+      const closeStudioModalBtn = document.getElementById("closeStudioModalBtn");
+      if (openStudioModalBtn && studioModal) {
+        openStudioModalBtn.addEventListener("click", function () {
+          studioModal.classList.remove("hidden");
+          studioModal.classList.add("flex");
+          renderPhotoshopCards();
+        });
+      }
+      if (closeStudioModalBtn && studioModal) {
+        closeStudioModalBtn.addEventListener("click", function () {
+          studioModal.classList.add("hidden");
+          studioModal.classList.remove("flex");
+        });
+      }
+
+      ["Photoshop", "Security", "Offline", "Steps"].forEach(function (t) {
+        const btn = document.getElementById("studioTab" + t);
+        if (btn) {
+          btn.addEventListener("click", function () {
+            switchStudioTab(t);
+          });
+        }
+      });
+
+      const toggleBleedCheckbox = document.getElementById("toggleBleedGuidesCheckbox");
+      if (toggleBleedCheckbox) {
+        toggleBleedCheckbox.addEventListener("change", function (e) {
+          showBleedGuides = Boolean(e.target.checked);
+          renderPhotoshopCards();
+        });
+      }
+
+      const downloadPsFrontBtn = document.getElementById("downloadPsFrontBtn");
+      if (downloadPsFrontBtn) {
+        downloadPsFrontBtn.addEventListener("click", function () {
+          const c = document.getElementById("photoshopFrontCanvas");
+          if (!c) return;
+          const profile = getActiveProfile();
+          const cleanName = (profile.churchName || "COTG").replace(/[^a-zA-Z0-9]+/g, "_");
+          const a = document.createElement("a");
+          a.href = c.toDataURL("image/png");
+          a.download = cleanName + "_Front_300DPI.png";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          showToast("Downloaded Front Card (300 DPI PNG)!");
+        });
+      }
+
+      const downloadPsBackBtn = document.getElementById("downloadPsBackBtn");
+      if (downloadPsBackBtn) {
+        downloadPsBackBtn.addEventListener("click", function () {
+          const c = document.getElementById("photoshopBackCanvas");
+          if (!c) return;
+          const profile = getActiveProfile();
+          const cleanName = (profile.churchName || "COTG").replace(/[^a-zA-Z0-9]+/g, "_");
+          const a = document.createElement("a");
+          a.href = c.toDataURL("image/png");
+          a.download = cleanName + "_Back_300DPI.png";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          showToast("Downloaded Back Card (300 DPI PNG)!");
+        });
+      }
+
+      const downloadHiResQrBtn = document.getElementById("downloadHiResQrBtn");
+      if (downloadHiResQrBtn) {
+        downloadHiResQrBtn.addEventListener("click", downloadHiResQrForPhotoshop);
+      }
+
+      const downloadPublicHtmlBtn = document.getElementById("downloadPublicHtmlBtn");
+      if (downloadPublicHtmlBtn) {
+        downloadPublicHtmlBtn.addEventListener("click", function () {
+          downloadCustomizedHtml(true);
+        });
+      }
+
+      const downloadAdminHtmlBtn = document.getElementById("downloadAdminHtmlBtn");
+      if (downloadAdminHtmlBtn) {
+        downloadAdminHtmlBtn.addEventListener("click", function () {
+          downloadCustomizedHtml(false);
+        });
+      }
+
+      const saveAdminPinBtn = document.getElementById("saveAdminPinBtn");
+      const adminPinInput = document.getElementById("adminPinInput");
+      if (saveAdminPinBtn && adminPinInput) {
+        saveAdminPinBtn.addEventListener("click", function () {
+          appState.adminPin = adminPinInput.value.trim();
+          saveStoredData();
+          showToast(appState.adminPin ? "Admin PIN saved!" : "Admin PIN cleared!");
+        });
+      }
+
+      const downloadSwBtn = document.getElementById("downloadSwBtn");
+      if (downloadSwBtn) downloadSwBtn.addEventListener("click", downloadServiceWorkerFile);
+
+      const downloadManifestBtn = document.getElementById("downloadManifestBtn");
+      if (downloadManifestBtn) downloadManifestBtn.addEventListener("click", downloadManifestFile);
+
+      const copyGoogleSitesCodeBtn = document.getElementById("copyGoogleSitesCodeBtn");
+      if (copyGoogleSitesCodeBtn) {
+        copyGoogleSitesCodeBtn.addEventListener("click", function () {
+          const box = document.getElementById("googleSitesEmbedTextarea");
+          if (box) copyTextFallback(box.value);
+        });
+      }
+
+      // Image / Logo Upload triggers
+      const quickLogoFileInput = document.getElementById("quickLogoFileInput");
+      const emblemUploadBtn = document.getElementById("emblemUploadBtn");
+      const quickUploadTopBtn = document.getElementById("quickUploadTopBtn");
+
+      if (emblemUploadBtn && quickLogoFileInput) {
+        emblemUploadBtn.addEventListener("click", function () {
+          quickLogoFileInput.click();
+        });
+      }
+      if (quickUploadTopBtn && quickLogoFileInput) {
+        quickUploadTopBtn.addEventListener("click", function () {
+          quickLogoFileInput.click();
+        });
+      }
+      if (quickLogoFileInput) {
+        quickLogoFileInput.addEventListener("change", function (e) {
+          if (e.target.files && e.target.files[0]) {
+            handleImageFileUpload(e.target.files[0], true);
+          }
+        });
+      }
+
+      const editorGlobalLogoInput = document.getElementById("editorGlobalLogoInput");
+      if (editorGlobalLogoInput) {
+        editorGlobalLogoInput.addEventListener("change", function (e) {
+          if (e.target.files && e.target.files[0]) {
+            handleImageFileUpload(e.target.files[0], true);
+          }
+        });
+      }
+
+      const editorProfilePhotoInput = document.getElementById("editorProfilePhotoInput");
+      if (editorProfilePhotoInput) {
+        editorProfilePhotoInput.addEventListener("change", function (e) {
+          if (e.target.files && e.target.files[0]) {
+            handleImageFileUpload(e.target.files[0], false);
+          }
+        });
+      }
+
+      const removeLogoBtn = document.getElementById("removeLogoBtn");
+      if (removeLogoBtn) {
+        removeLogoBtn.addEventListener("click", function () {
+          const profile = getActiveProfile();
+          profile.photoDataUrl = "";
+          appState.globalLogoDataUrl = "";
+          saveStoredData();
+          populateEditorInputs();
+          renderCardView();
+          showToast("Restored Royal Gold Church Emblem");
+        });
+      }
+
+      // Save .vcf buttons
+      const saveVcfBtn = document.getElementById("saveVcfBtn");
+      if (saveVcfBtn) saveVcfBtn.addEventListener("click", downloadVcfFile);
+
+      const editorDownloadVcfBtn = document.getElementById("editorDownloadVcfBtn");
+      if (editorDownloadVcfBtn) editorDownloadVcfBtn.addEventListener("click", downloadVcfFile);
+
+      const modalDownloadVcfBtn = document.getElementById("modalDownloadVcfBtn");
+      if (modalDownloadVcfBtn) modalDownloadVcfBtn.addEventListener("click", downloadVcfFile);
+
+      // Collapsible schedule
+      const toggleScheduleBtn = document.getElementById("toggleScheduleBtn");
+      const scheduleBody = document.getElementById("scheduleCollapseBody");
+      const scheduleChevron = document.getElementById("scheduleChevron");
+      if (toggleScheduleBtn && scheduleBody && scheduleChevron) {
+        toggleScheduleBtn.addEventListener("click", function () {
+          isScheduleOpen = !isScheduleOpen;
+          if (isScheduleOpen) {
+            scheduleBody.classList.remove("hidden");
+            scheduleChevron.classList.add("rotate-180");
+          } else {
+            scheduleBody.classList.add("hidden");
+            scheduleChevron.classList.remove("rotate-180");
+          }
+        });
+      }
+
+      // Live Editor toggles
+      const toggleEditorBtn = document.getElementById("toggleEditorBtn");
+      if (toggleEditorBtn) {
+        toggleEditorBtn.addEventListener("click", function () {
+          toggleEditor();
+        });
+      }
+
+      const closeEditorBtn = document.getElementById("closeEditorBtn");
+      if (closeEditorBtn) {
+        closeEditorBtn.addEventListener("click", function () {
+          toggleEditor(false);
+        });
+      }
+
+      // QR Modal toggles
+      const qrModal = document.getElementById("qrModal");
+      const openQrModal = function () {
+        if (!qrModal) return;
+        qrModal.classList.remove("hidden");
+        qrModal.classList.add("flex");
+        updateAllQrCodes();
+      };
+      const closeQrModal = function () {
+        if (!qrModal) return;
+        qrModal.classList.add("hidden");
+        qrModal.classList.remove("flex");
+      };
+
+      const openQrModalBtn = document.getElementById("openQrModalBtn");
+      if (openQrModalBtn) openQrModalBtn.addEventListener("click", openQrModal);
+
+      const quickQrBtn = document.getElementById("quickQrBtn");
+      if (quickQrBtn) quickQrBtn.addEventListener("click", openQrModal);
+
+      const closeQrModalBtn = document.getElementById("closeQrModalBtn");
+      if (closeQrModalBtn) closeQrModalBtn.addEventListener("click", closeQrModal);
+
+      // QR Mode switches
+      const qrModeUrlBtn = document.getElementById("qrModeUrlBtn");
+      if (qrModeUrlBtn) {
+        qrModeUrlBtn.addEventListener("click", function () {
+          qrMode = "url";
+          updateAllQrCodes();
+        });
+      }
+
+      const qrModeVcardBtn = document.getElementById("qrModeVcardBtn");
+      if (qrModeVcardBtn) {
+        qrModeVcardBtn.addEventListener("click", function () {
+          qrMode = "vcard";
+          updateAllQrCodes();
+        });
+      }
+
+      const inlineQrModeToggleBtn = document.getElementById("inlineQrModeToggleBtn");
+      if (inlineQrModeToggleBtn) {
+        inlineQrModeToggleBtn.addEventListener("click", function () {
+          qrMode = qrMode === "url" ? "vcard" : "url";
+          updateAllQrCodes();
+        });
+      }
+
+      // QR PNG downloads
+      const inlineDownloadQrBtn = document.getElementById("inlineDownloadQrBtn");
+      if (inlineDownloadQrBtn) {
+        inlineDownloadQrBtn.addEventListener("click", function () {
+          downloadQrPng("inlineQrContainer");
+        });
+      }
+
+      const modalDownloadQrBtn = document.getElementById("modalDownloadQrBtn");
+      if (modalDownloadQrBtn) {
+        modalDownloadQrBtn.addEventListener("click", function () {
+          downloadQrPng("modalQrContainer");
+        });
+      }
+
+      // Download index.html buttons
+      const downloadHtmlBtn = document.getElementById("downloadHtmlBtn");
+      if (downloadHtmlBtn) {
+        downloadHtmlBtn.addEventListener("click", function () {
+          downloadCustomizedHtml(false);
+        });
+      }
+
+      const editorDownloadHtmlBtn = document.getElementById("editorDownloadHtmlBtn");
+      if (editorDownloadHtmlBtn) {
+        editorDownloadHtmlBtn.addEventListener("click", function () {
+          downloadCustomizedHtml(false);
+        });
+      }
+
+      // Reset Defaults
+      const resetDefaultsBtn = document.getElementById("resetDefaultsBtn");
+      if (resetDefaultsBtn) {
+        resetDefaultsBtn.addEventListener("click", function () {
+          appState = JSON.parse(JSON.stringify(DEFAULT_APP_STATE));
+          saveStoredData();
+          renderNavigationBars();
+          populateEditorInputs();
+          renderCardView();
+          showToast("Reset all COTG cards to default details");
+        });
+      }
+
+      // Share Button
+      const shareCardBtn = document.getElementById("shareCardBtn");
+      if (shareCardBtn) {
+        shareCardBtn.addEventListener("click", function () {
+          const profile = getActiveProfile();
+          const shareUrl = profile.website || "https://www.ctgministries.net";
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareUrl).then(function () {
+              showToast("Copied link: " + shareUrl);
+            }).catch(function () {
+              copyTextFallback(shareUrl);
+            });
+          } else {
+            copyTextFallback(shareUrl);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

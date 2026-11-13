@@ -1,0 +1,16 @@
+{
+  "name": "Church of the Temple of God — COTG Connect",
+  "short_name": "COTG Connect",
+  "description": "Interactive Digital Calling Card for CTG Headquarters, 10 Parishes, Mission & Church Members",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0A192F",
+  "theme_color": "#D4AF37",
+  "icons": [
+    {
+      "src": "https://www.ctgministries.net/favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
